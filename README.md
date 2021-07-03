@@ -5,9 +5,8 @@
 
 ```kviz->Tasks->build->build```
 
-```kviz->Tasks->build->build```
+```kviz->Tasks->application->run```
 
-kviz->Tasks->application->run
 
 ### Pokretanje iz terminala:
 

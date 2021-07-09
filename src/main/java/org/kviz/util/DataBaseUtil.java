@@ -1,15 +1,24 @@
 package org.kviz.util;
 
-import java.sql.*;
-import java.lang.*;
 import org.kviz.model.Korisnik;
 import org.kviz.model.Matrica;
-import java.util.*;
+import org.springframework.stereotype.Repository;
 
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.Random;
 
+@Repository
 public class DataBaseUtil {
-    public static void napuni_bazu() {
-        DataBaseUtil dbUtil = new DataBaseUtil();
+
+    private Connection connect() throws SQLException {
+        String imeBaze = "test.db";
+        String url = "jdbc:sqlite:" + imeBaze;
+        Connection conn = DriverManager.getConnection(url);
+        return conn;
+    }
+
+    public void napuni_bazu() {
         Random random = new Random();
 
         String korisnik = " CREATE TABLE IF NOT EXISTS Korisnik (\n"
@@ -25,72 +34,65 @@ public class DataBaseUtil {
                 + " dimenzija integer NOT NULL \n"
                 + ");";
 
-        dbUtil.kreiraj_tablicu(korisnik);
-        dbUtil.kreiraj_tablicu(matrica);
+        kreiraj_tablicu(korisnik);
+        kreiraj_tablicu(matrica);
 
-        dbUtil.dodaj_korisnike(1,"perinasifra", "Pero", 0);
-        dbUtil.dodaj_korisnike(2,"mirkovasifra", "Mirko", 6);
-        dbUtil.dodaj_korisnike(3,"slavkovasifra", "Slavko", 2);
-        dbUtil.dodaj_korisnike(4,"darkovasifra", "Darko", 1);
-        dbUtil.dodaj_korisnike(5,"ivinasifra", "Ivo", 7);
-        dbUtil.dodaj_korisnike(6,"aninaasifra", "Ana", 6);
-        dbUtil.dodaj_korisnike(7,"majinasifra", "Maja", 5);
-        dbUtil.dodaj_korisnike(8,"ružinasifra", "Ruža", 10);
-        dbUtil.dodaj_korisnike(9,"petrinasifra", "Petra", 4);
-        dbUtil.dodaj_korisnike(10,"teninasifra", "Tena", 9);
+        dodaj_korisnike(1, "perinasifra", "Pero", 0);
+        dodaj_korisnike(2, "mirkovasifra", "Mirko", 6);
+        dodaj_korisnike(3, "slavkovasifra", "Slavko", 2);
+        dodaj_korisnike(4, "darkovasifra", "Darko", 1);
+        dodaj_korisnike(5, "ivinasifra", "Ivo", 7);
+        dodaj_korisnike(6, "aninaasifra", "Ana", 6);
+        dodaj_korisnike(7, "majinasifra", "Maja", 5);
+        dodaj_korisnike(8, "ružinasifra", "Ruža", 10);
+        dodaj_korisnike(9, "petrinasifra", "Petra", 4);
+        dodaj_korisnike(10, "teninasifra", "Tena", 9);
 
-        for(int i=0; i<10; i++){ //napravi 10 matrica dimenzija 2x2
+        for (int i = 0; i < 10; i++) { //napravi 10 matrica dimenzija 2x2
             int dimenzija = 2;
             String vrijednosti = "";
-            for(int row=0; row<dimenzija; row++){
-                for(int col=0; col<dimenzija; col++){
+            for (int row = 0; row < dimenzija; row++) {
+                for (int col = 0; col < dimenzija; col++) {
                     int x = random.nextInt(5 - 0); // od 0 do 5...elementi matrice
                     vrijednosti += x + ",";
                 }
             }
             vrijednosti = vrijednosti.substring(0, vrijednosti.length() - 1); //makni zarez na kraju
-            dbUtil.dodaj_matrice(i, vrijednosti, dimenzija);
+            dodaj_matrice(i, vrijednosti, dimenzija);
         }
 
-        for(int i=10; i<20; i++){ //napravi 10 matrica dimenzija 3x3
+        for (int i = 10; i < 20; i++) { //napravi 10 matrica dimenzija 3x3
             int dimenzija = 3;
             String vrijednosti = "";
-            for(int row=0; row<dimenzija; row++){
-                for(int col=0; col<dimenzija; col++){
+            for (int row = 0; row < dimenzija; row++) {
+                for (int col = 0; col < dimenzija; col++) {
                     int x = random.nextInt(5 - 0); // od 0 do 5...elementi matrice
                     vrijednosti += x + ",";
                 }
             }
             vrijednosti = vrijednosti.substring(0, vrijednosti.length() - 1); //makni zarez na kraju
-            dbUtil.dodaj_matrice(i, vrijednosti, dimenzija);
+            dodaj_matrice(i, vrijednosti, dimenzija);
         }
 
-        ArrayList<Matrica> matrice = dbUtil.dohvati_sve_matrice();
-        ArrayList<Korisnik> korisnici = dbUtil.dohvati_sve_korisnike();
+        ArrayList<Matrica> matrice = dohvati_sve_matrice();
+        ArrayList<Korisnik> korisnici = dohvati_sve_korisnike();
     }
 
-
-    public void kreiraj_tablicu(String str){
-        String imeBaze = "test.db";
-        String url = "jdbc:sqlite:" + imeBaze;
-        try (Connection conn = DriverManager.getConnection(url)) {
+    public void kreiraj_tablicu(String str) {
+        try (Connection conn = connect()) {
             if (conn != null) {
-                //DatabaseMetaData meta = conn.getMetaData();
-                //System.out.println("Ime biblioteke za rad s bazom podataka " + meta.getDriverName());
-                System.out.println("Stvorena je nova baza.");
-                Statement stm =  conn.createStatement();
+                Statement stm = conn.createStatement();
                 stm.execute(str);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
-    public void dodaj_korisnike(int i, String loz, String im, int naj_rez){
+
+    private void dodaj_korisnike(int i, String loz, String im, int naj_rez) {
         String upit = "INSERT INTO Korisnik (id, lozinka, ime, najbolji_rezultat) VALUES (?, ?, ?, ?)";
 
-        String imeBaze = "test.db";
-        String url = "jdbc:sqlite:" + imeBaze;
-        try (Connection conn = DriverManager.getConnection(url)) {
+        try (Connection conn = connect()) {
             if (conn != null) {
                 try {
                     PreparedStatement prep = conn.prepareStatement(upit);
@@ -106,12 +108,11 @@ public class DataBaseUtil {
             System.out.println(e.getMessage());
         }
     }
-    public void dodaj_matrice(int i, String vr, int dim){
+
+    public void dodaj_matrice(int i, String vr, int dim) {
         String upit = "INSERT INTO Matrica (id, vrijednosti, dimenzija) VALUES (?, ?, ?)";
 
-        String imeBaze = "test.db";
-        String url = "jdbc:sqlite:" + imeBaze;
-        try (Connection conn = DriverManager.getConnection(url)) {
+        try (Connection conn = connect()) {
             if (conn != null) {
                 try {
                     PreparedStatement prep = conn.prepareStatement(upit);
@@ -130,10 +131,8 @@ public class DataBaseUtil {
     public ArrayList<Matrica> dohvati_sve_matrice() {
         String upit = " SELECT id, vrijednosti, dimenzija FROM Matrica ";
 
-        String imeBaze = "test.db";
-        String url = "jdbc:sqlite:" + imeBaze;
         ArrayList<Matrica> matrice = new ArrayList<Matrica>();
-        try (Connection conn = DriverManager.getConnection(url)) {
+        try (Connection conn = connect()) {
             if (conn != null) {
                 try {
                     Statement stm = conn.createStatement();
@@ -160,10 +159,8 @@ public class DataBaseUtil {
     public ArrayList<Korisnik> dohvati_sve_korisnike() {
         String upit = " SELECT id, lozinka, ime, najbolji_rezultat FROM Korisnik ";
 
-        String imeBaze = "test.db";
-        String url = "jdbc:sqlite:" + imeBaze;
         ArrayList<Korisnik> korisnici = new ArrayList<Korisnik>();
-        try (Connection conn = DriverManager.getConnection(url)) {
+        try (Connection conn = connect()) {
             if (conn != null) {
                 try {
                     Statement stm = conn.createStatement();

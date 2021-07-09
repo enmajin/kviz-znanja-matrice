@@ -11,10 +11,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class KvizApplication implements CommandLineRunner {
 
     private final TestService service;
+    private final DataBaseUtil dataBaseUtil;
 
     @Autowired
-    public KvizApplication(TestService service) {
+    public KvizApplication(TestService service, DataBaseUtil dataBaseUtil) {
         this.service = service;
+        this.dataBaseUtil = dataBaseUtil;
     }
 
     public static void main(String[] args) {
@@ -24,7 +26,7 @@ public class KvizApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        DataBaseUtil.napuni_bazu();
+        dataBaseUtil.napuni_bazu();
         service.printMessage(args); //ovo je samo test da se nesto ispise u konzolu, ovdje dodajemo stvari koje se trebaju izvrsiti prilikom pokretanja aplikacije
     }
 }

@@ -1,20 +1,17 @@
 package org.kviz;
 
-import ch.qos.logback.core.db.dialect.DBUtil;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
-import org.kviz.util.DataBaseUtil;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ConfigurableApplicationContext;
 
-public class JavaFXApp extends Application {
+public class JavaFXApplication extends Application {
     private ConfigurableApplicationContext applicationContext;
 
     @Override
     public void start(Stage stage) {
-        DataBaseUtil.napuni_bazu();
         applicationContext.publishEvent(new StageReadyEvent(stage));
     }
 
@@ -30,7 +27,7 @@ public class JavaFXApp extends Application {
         Platform.exit();
     }
 
-    public class StageReadyEvent extends ApplicationEvent {
+    public static class StageReadyEvent extends ApplicationEvent {
         public StageReadyEvent(Stage stage) {
             super(stage);
         }

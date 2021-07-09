@@ -1,17 +1,21 @@
 # kviz-znanja-matrice
-## Pokretanje
-### Pokretanje preko Gradle plugina:
+## Pokretanje aplikacije
+Za pokretanje aplikacije se brine Spring Boot.
+Konfiguracija bi se trebala automatski povuci. 
+
+Main klasa je: `org.kviz.KvizApplication`.
+
+
+## Pokretanje builda
+### Pokretanje builda preko Gradle plugina:
 ```kviz->Tasks->build->clean```
 
 ```kviz->Tasks->build->build```
 
-```kviz->Tasks->application->run```
 
-
-### Pokretanje iz terminala:
+### Pokretanje builda iz terminala:
 
 ```
 ./gradlew clean build
-./gradlew run`
 ``` 
 

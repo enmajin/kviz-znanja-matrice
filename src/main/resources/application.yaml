@@ -1,0 +1,15 @@
+spring:
+  main:
+    web-application-type: none
+
+  application:
+    ui:
+      title: Kviz znanja - matrice
+
+  datasource:
+    url: jdbc:sqlite:test.db
+    driver-class-name: org.sqlite.JDBC
+    username: admin
+    password: admin
+
+

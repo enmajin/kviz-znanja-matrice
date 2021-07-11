@@ -184,4 +184,33 @@ public class DataBaseUtil {
         }
         return korisnici;
     }
+
+    public Matrica dohvatiMatricuDimenzijeN(int n) {
+        Matrica matrica = new Matrica();
+
+        String upit = "SELECT id, vrijednosti, dimenzija FROM Matrica " +
+                "WHERE dimenzija = ? " +
+                "ORDER BY RANDOM() " +
+                "LIMIT 1";
+
+        try (Connection conn = connect()) {
+            if (conn != null) {
+                try {
+                    PreparedStatement prep = conn.prepareStatement(upit);
+                    prep.setInt(1, n);
+                    ResultSet rezultat = prep.executeQuery();
+                    matrica = new Matrica(
+                            rezultat.getInt("id"),
+                            rezultat.getString("vrijednosti"),
+                            rezultat.getInt("dimenzija")
+                    );
+                } catch (SQLException e) {
+                    //todo dodati logiranje exceptiona
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return matrica;
+    }
 }

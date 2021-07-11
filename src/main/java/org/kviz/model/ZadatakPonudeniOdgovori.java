@@ -43,6 +43,11 @@ public class ZadatakPonudeniOdgovori extends Zadatak {
         return korisnikovoRjesenje;
     }
 
+    @Override
+    public boolean getIsZadatakIspravnoRijesen() {
+        return korisnikovoRjesenje == ispravnoRjesenje;
+    }
+
     public void setKorisnikovoRjesenje(SlovoUzOdgovor korisnikovoRjesenje) {
         this.korisnikovoRjesenje = korisnikovoRjesenje;
     }

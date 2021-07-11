@@ -4,7 +4,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import org.kviz.util.StageReadyEvent;
-import org.kviz.util.ViewEnum;
+import org.kviz.util.Ekrani;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
@@ -13,7 +13,7 @@ public class JavaFXApplication extends Application {
 
     @Override
     public void start(Stage stage) {
-        applicationContext.publishEvent(new StageReadyEvent(stage, ViewEnum.POCETNA));
+        applicationContext.publishEvent(new StageReadyEvent(stage, Ekrani.POCETNA));
     }
 
     @Override

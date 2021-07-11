@@ -11,11 +11,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kviz.controller.PitanjeController">
+<AnchorPane fx:id="pitanjeAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kviz.controller.PitanjeController">
    <children>
-      <Pane fx:id="odgovorMatricaContainer" />
-      <Pane fx:id="visestrukiOdabirContainer" />
-      <VBox prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox fx:id="mainVBox" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox alignment="TOP_CENTER" prefHeight="55.0" prefWidth="600.0" spacing="100.0">
                <children>
@@ -24,7 +22,7 @@
                         <Insets />
                      </HBox.margin>
                   </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="05:00">
+                  <Text fx:id="vrijemeText" strokeType="OUTSIDE" strokeWidth="0.0" text="05:00">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -58,11 +56,11 @@
                      </toggleGroup>
                   </RadioButton>
                   <RadioButton mnemonicParsing="false" text="Odgovor 1" toggleGroup="$odgovori" />
-                  <RadioButton mnemonicParsing="false" text="Odgovor 3" />
-                  <RadioButton mnemonicParsing="false" text="Odgovor 4" />
+                  <RadioButton mnemonicParsing="false" text="Odgovor 3" toggleGroup="$odgovori" />
+                  <RadioButton mnemonicParsing="false" text="Odgovor 4" toggleGroup="$odgovori" />
                </children>
             </HBox>
-            <HBox fx:id="odgovorMatricaHbox" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+            <HBox fx:id="matricaOdgovorHbox" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
                   <Label text="Unesite odgovor:" />
                   <Pane prefHeight="110.0" prefWidth="185.0">
@@ -71,9 +69,9 @@
                      </children></Pane>
                </children>
             </HBox>
-            <HBox alignment="BOTTOM_RIGHT" prefHeight="25.0" prefWidth="540.0" spacing="10.0">
+            <HBox fx:id="gumbiHbox" alignment="BOTTOM_RIGHT" prefHeight="25.0" prefWidth="540.0" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" text="Odustani" />
+                  <Button mnemonicParsing="false" onMouseClicked="#onOdustani" text="Odustani" />
                   <Button mnemonicParsing="false" onMouseClicked="#onPotvrdi" text="Potvrdi" />
                </children>
             </HBox>

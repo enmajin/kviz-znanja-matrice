@@ -4,25 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Matrica {
-    int id;
     int dimenzija;
     String vrijednosti;
 
     public Matrica() {
     }
 
-    public Matrica(int id, String vrijednosti, int dimenzija) {
-        this.id = id;
+    public Matrica(String vrijednosti, int dimenzija) {
         this.vrijednosti = vrijednosti;
         this.dimenzija = dimenzija;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getDimenzija() {

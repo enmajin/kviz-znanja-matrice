@@ -7,21 +7,21 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="rezultatiAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kviz.controller.RezultatiController">
    <children>
-      <Text layoutX="275.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rezultat" />
-      <Text layoutX="275.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3 / 5">
+      <Text fx:id="testid" layoutX="275.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rezultat" />
+      <Text fx:id="bodovi" layoutX="275.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3 / 5">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <TableView layoutX="131.0" layoutY="123.0" prefHeight="200.0" prefWidth="332.0">
+      <TableView fx:id="odgovori" layoutX="131.0" layoutY="123.0" prefHeight="200.0" prefWidth="332.0">
         <columns>
-          <TableColumn prefWidth="163.0" text="Tvoji odgovori" />
-            <TableColumn prefWidth="150.0" text="Točni odovori" />
+          <TableColumn fx:id="korisnikoviOdgovori" prefWidth="163.0" text="Tvoji odgovori" />
+            <TableColumn fx:id="ispravniOdgovori" prefWidth="150.0" text="Točni odovori" />
         </columns>
       </TableView>
-      <Button layoutX="220.0" layoutY="335.0" mnemonicParsing="false" text="Novi kviz" />
-      <Button layoutX="313.0" layoutY="336.0" mnemonicParsing="false" text="Pokaži rang listu" />
+      <Button layoutX="220.0" layoutY="335.0" mnemonicParsing="false" onMouseClicked="#onNoviKviz" text="Novi kviz" />
+      <Button layoutX="313.0" layoutY="336.0" mnemonicParsing="false" text="Pokaži rang listu" onMouseClicked="#onPokaziRangListu"/>
    </children>
 </AnchorPane>

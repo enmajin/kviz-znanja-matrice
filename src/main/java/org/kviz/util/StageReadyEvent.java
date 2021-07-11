@@ -1,25 +1,39 @@
 package org.kviz.util;
 
 import javafx.stage.Stage;
+import org.kviz.model.InfoZaRezultateDto;
+import org.kviz.model.Zadatak;
 import org.springframework.context.ApplicationEvent;
 
-public class StageReadyEvent extends ApplicationEvent {
-    private ViewEnum viewEnum;
+import java.util.ArrayList;
 
-    public StageReadyEvent(Stage stage, ViewEnum viewEnum) {
+public class StageReadyEvent extends ApplicationEvent {
+    private Ekrani ekran;
+    private InfoZaRezultateDto data;
+
+    public StageReadyEvent(Stage stage, Ekrani ekrani) {
         super(stage);
-        this.viewEnum = viewEnum;
+        this.ekran = ekrani;
     }
 
     public Stage getStage() {
         return ((Stage) getSource());
     }
 
-    public ViewEnum getViewEnum() {
-        return viewEnum;
+    public Ekrani getEkran() {
+        return ekran;
     }
 
-    public void setViewEnum(ViewEnum viewEnum) {
-        this.viewEnum = viewEnum;
+    public void setData(InfoZaRezultateDto data) {
+        this.data = data;
     }
+
+    public InfoZaRezultateDto getData() {
+        return data;
+    }
+
+    public void setEkran(Ekrani ekran) {
+        this.ekran = ekran;
+    }
+
 }

@@ -142,7 +142,7 @@ public class DataBaseUtil {
                         String vrijednosti = rezultat.getString("vrijednosti");
                         int dimenzija = rezultat.getInt("dimenzija");
 
-                        Matrica matrica = new Matrica(id, vrijednosti, dimenzija);
+                        Matrica matrica = new Matrica(vrijednosti, dimenzija);
 
                         matrice.add(matrica);
                     }
@@ -188,7 +188,7 @@ public class DataBaseUtil {
     public Matrica dohvatiMatricuDimenzijeN(int n) {
         Matrica matrica = new Matrica();
 
-        String upit = "SELECT id, vrijednosti, dimenzija FROM Matrica " +
+        String upit = "SELECT vrijednosti, dimenzija FROM Matrica " +
                 "WHERE dimenzija = ? " +
                 "ORDER BY RANDOM() " +
                 "LIMIT 1";
@@ -200,7 +200,6 @@ public class DataBaseUtil {
                     prep.setInt(1, n);
                     ResultSet rezultat = prep.executeQuery();
                     matrica = new Matrica(
-                            rezultat.getInt("id"),
                             rezultat.getString("vrijednosti"),
                             rezultat.getInt("dimenzija")
                     );

@@ -1,12 +1,18 @@
 package org.kviz.model;
 
-public class Zadatak {
+public abstract class Zadatak {
     String pitanje;
     Matrica matrica1;
     Matrica matrica2;
+    Object ispravnoRjesenje;
+    Object korisnikovoRjesenje;
 
     public Zadatak() {
     }
+
+    abstract public Object getIspravnoRjesenje();
+    abstract public Object getKorisnikovoRjesenje();
+    abstract public boolean getIsZadatakIspravnoRijesen();
 
     public Zadatak(String pitanje, Matrica matrica1, Matrica matrica2) {
         this.pitanje = pitanje;

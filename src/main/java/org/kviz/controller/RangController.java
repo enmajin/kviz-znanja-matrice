@@ -12,6 +12,5 @@ import java.util.ResourceBundle;
 public class RangController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
     }
 }

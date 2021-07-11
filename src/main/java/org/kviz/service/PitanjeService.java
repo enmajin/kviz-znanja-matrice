@@ -1,9 +1,15 @@
 package org.kviz.service;
 
+import javafx.scene.Node;
+import javafx.stage.Stage;
+import org.kviz.controller.RezultatiController;
+import org.kviz.model.InfoZaRezultateDto;
 import org.kviz.model.Matrica;
 import org.kviz.model.Zadatak;
 import org.kviz.model.ZadatakMatricaOdgovor;
 import org.kviz.repository.PitanjeRepository;
+import org.kviz.util.Ekrani;
+import org.kviz.view.SceneManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +21,7 @@ import java.util.Random;
 public class PitanjeService {
     private static final int MAX_DIMENZIJA = 3; //todo: dodati vise mogucih dimenzija u bazu
     private static final ArrayList<Operacije> LISTA_PITANJA = new ArrayList<>(List.of(Operacije.values()));
+    private static final int BROJ_ZADATAKA_U_KVIZU = 5;
 
     private enum Operacije {
         ZBROJI("Zbroji"), ODUZMI("Oduzmi"), POMNOZI("Pomnoži");
@@ -32,21 +39,31 @@ public class PitanjeService {
     }
 
     private PitanjeRepository pitanjeRepository;
+    private SceneManager sceneManager;
+
+    public void promijeniEkran(Node pocetna, Ekrani ekran, InfoZaRezultateDto data) {
+        sceneManager.promijeniEkran(getStage(pocetna), ekran, data);
+    }
+
+    private Stage getStage(Node pocetna) {
+        return (Stage) pocetna.getScene().getWindow();
+    }
 
     @Autowired
-    public PitanjeService(PitanjeRepository pitanjeRepository) {
+    public PitanjeService(PitanjeRepository pitanjeRepository, SceneManager sceneManager) {
         this.pitanjeRepository = pitanjeRepository;
+        this.sceneManager = sceneManager;
     }
 
     public ArrayList<Zadatak> generirajZadatke() {
         ArrayList<Zadatak> zadaci = new ArrayList<>();
-        for (int i=0; i<5; i++) {
-            zadaci.add(generirajZadatakRjesenjeMatrica());
+        for (int i=0; i<BROJ_ZADATAKA_U_KVIZU; i++) {
+            zadaci.add(generirajZadatakRjesenjeMatrica()); //todo: dodati i generiranje zadatka s ponudenim odgovorom
         }
         return zadaci;
     }
 
-    private Zadatak generirajZadatakRjesenjeMatrica(){ //todo: dodati i generiranje zadatka s ponudenim odgovorom
+    private Zadatak generirajZadatakRjesenjeMatrica(){
         Random rnd = new Random();
         Operacije operacije = LISTA_PITANJA.get(rnd.nextInt(LISTA_PITANJA.size()));
         String pitanje =  operacije.getValue() + " matrice";

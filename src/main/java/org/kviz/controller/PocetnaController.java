@@ -6,8 +6,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import net.rgielen.fxweaver.core.FxmlView;
-import org.kviz.util.ViewEnum;
 import org.kviz.service.PocetnaService;
+import org.kviz.util.Ekrani;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
@@ -21,7 +21,8 @@ public class PocetnaController implements Initializable {
 
     private final PocetnaService pocetnaService;
 
-    @FXML private AnchorPane pocetna;
+    @FXML
+    private AnchorPane pocetnaAnchorPane;
     private Alert alertMetodaNijeImplementirana;
 
     @Autowired
@@ -35,11 +36,11 @@ public class PocetnaController implements Initializable {
     }
 
     public void onProbniKviz(MouseEvent mouseEvent) {
-        pocetnaService.promijeniEkran(pocetna, ViewEnum.PITANJE);
+        pocetnaService.promijeniEkran(pocetnaAnchorPane, Ekrani.PITANJE, null);
     }
 
     public void onRegistrirajSe(MouseEvent mouseEvent) {
-        pocetnaService.promijeniEkran(pocetna, ViewEnum.REGISTRACIJA);
+        pocetnaService.promijeniEkran(pocetnaAnchorPane, Ekrani.REGISTRACIJA, null);
     }
 
     public void onLogIn(MouseEvent mouseEvent) {

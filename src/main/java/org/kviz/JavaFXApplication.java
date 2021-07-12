@@ -19,7 +19,7 @@ public class JavaFXApplication extends Application {
     @Override
     public void init() {
         String[] args = getParameters().getRaw().toArray(new String[0]);
-        applicationContext = new SpringApplicationBuilder(KvizApplication.class).run(args);
+        applicationContext = new SpringApplicationBuilder(MainApplication.class).run(args);
     }
 
     @Override

@@ -9,7 +9,6 @@ import net.rgielen.fxweaver.core.FxmlView;
 import org.kviz.service.PocetnaService;
 import org.kviz.util.Ekrani;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
 import java.net.URL;
@@ -26,7 +25,7 @@ public class PocetnaController implements Initializable {
     private Alert alertMetodaNijeImplementirana;
 
     @Autowired
-    public PocetnaController(PocetnaService pocetnaService, ApplicationEventPublisher applicationEventPublisher) {
+    public PocetnaController(PocetnaService pocetnaService) {
         this.pocetnaService = pocetnaService;
     }
 

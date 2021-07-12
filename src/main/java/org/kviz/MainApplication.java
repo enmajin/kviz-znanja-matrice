@@ -7,12 +7,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class KvizApplication implements CommandLineRunner {
+public class MainApplication implements CommandLineRunner {
 
     private final DataBaseUtil dataBaseUtil;
 
     @Autowired
-    public KvizApplication(DataBaseUtil dataBaseUtil) {
+    public MainApplication(DataBaseUtil dataBaseUtil) {
         this.dataBaseUtil = dataBaseUtil;
     }
 

@@ -46,7 +46,7 @@ public class PitanjeServiceTest {
         }
     }
 
-    //todo treba ovo osposobiti da mozemo testirati bar tu metodu u konstruktorima
+    //todo treba ovo osposobiti da mozemo testirati bar tu metodu u kontrolerima
 //    @Test
 //    public void promijeniEkran() {
 //        AnchorPane anchorPane = new AnchorPane();

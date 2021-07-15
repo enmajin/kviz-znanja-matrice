@@ -51,14 +51,14 @@
             </HBox>
             <HBox fx:id="visestrukiOdgovorHbox" alignment="CENTER" prefHeight="81.0" prefWidth="540.0" spacing="30.0">
                <children>
-                  <RadioButton mnemonicParsing="false" text="Odgovor 2">
+                  <RadioButton fx:id="a" mnemonicParsing="false" selected="true">
                      <toggleGroup>
                         <ToggleGroup fx:id="odgovori" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" text="Odgovor 1" toggleGroup="$odgovori" />
-                  <RadioButton mnemonicParsing="false" text="Odgovor 3" toggleGroup="$odgovori" />
-                  <RadioButton mnemonicParsing="false" text="Odgovor 4" toggleGroup="$odgovori" />
+                  <RadioButton fx:id="b" mnemonicParsing="false" toggleGroup="$odgovori" />
+                  <RadioButton fx:id="c" mnemonicParsing="false" toggleGroup="$odgovori" />
+                  <RadioButton fx:id="d" mnemonicParsing="false" toggleGroup="$odgovori" />
                </children>
             </HBox>
             <HBox fx:id="matricaOdgovorHbox" prefHeight="100.0" prefWidth="200.0" spacing="10.0">

@@ -6,9 +6,7 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -18,15 +16,18 @@ import net.rgielen.fxweaver.core.FxmlView;
 import org.kviz.model.*;
 import org.kviz.service.PitanjeService;
 import org.kviz.util.Ekrani;
+import org.kviz.util.SlovoUzOdgovor;
 import org.kviz.util.User;
 import org.kviz.util.VrstaZadatka;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+
 import java.net.URL;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 @Component
@@ -57,6 +58,8 @@ public class PitanjeController implements Initializable {
     private Text vrijemeText;
     @FXML
     private Text imekorisnika;
+    @FXML
+    ToggleGroup odgovori;
 
 
     private ArrayList<Zadatak> zadaci;
@@ -106,9 +109,15 @@ public class PitanjeController implements Initializable {
     private void prikaziZadatak() {
         brojPitanjaLabel.setText("Pitanje " + (brojOdgovorenihPitanja + 1));
         pitanjeLabel.setText(trenutniZadatak.getPitanje());
-
-        matrica1Label.setText(trenutniZadatak.getMatrica1().toString());
-        matrica2Label.setText(trenutniZadatak.getMatrica2().toString());
+        if(trenutniZadatak.getMatrica2() == null)
+        {
+            matrica1Label.setText(trenutniZadatak.getMatrica1().toString());
+            matrica2Label.setText("");
+        }
+        else {
+            matrica1Label.setText(trenutniZadatak.getMatrica1().toString());
+            matrica2Label.setText(trenutniZadatak.getMatrica2().toString());
+        };
     }
 
     private void postaviMjestoZaOdgovor() {
@@ -132,6 +141,21 @@ public class PitanjeController implements Initializable {
         } else if (trenutniZadatak instanceof ZadatakPonudeniOdgovori) {
             vrstaZadatka = VrstaZadatka.VISESTRUKI_ODABIR;
             mainVBox.getChildren().remove(matricaOdgovorHbox);
+            Map<SlovoUzOdgovor, Double> mapa = ((ZadatakPonudeniOdgovori) trenutniZadatak).getPonudeniOdgovori();
+
+            for(Toggle odg: odgovori.getToggles()){
+                RadioButton value = (RadioButton) odg;
+                String id = value.getId();
+                SlovoUzOdgovor ID;
+                if(id.equals("a")) ID = SlovoUzOdgovor.a;
+                else if(id.equals("b")) ID = SlovoUzOdgovor.b;
+                else if(id.equals("c")) ID = SlovoUzOdgovor.c;
+                else ID = SlovoUzOdgovor.d;
+                double vrijednost = mapa.get(ID);
+                String vrijednost_s = vrijednost + "";
+                value.setText(vrijednost_s);
+            }
+
         } else {
             new Alert(Alert.AlertType.ERROR, "Greska u dohvacanju zadatka").show(); //todo: maknuti nakon testiranja
         }
@@ -145,7 +169,9 @@ public class PitanjeController implements Initializable {
             zadaci.set(brojOdgovorenihPitanja, trenutniZadatak);
         }
         else if (vrstaZadatka == VrstaZadatka.VISESTRUKI_ODABIR) {
-            //todo dodati zadatke s visestrukim odabirom (radio buttoni su vec pridruzeni toggle grupi "odgovori")
+            SlovoUzOdgovor slovo = procitajUneseniDouble();
+            ((ZadatakPonudeniOdgovori) trenutniZadatak).setKorisnikovoRjesenje(slovo);
+            zadaci.set(brojOdgovorenihPitanja, trenutniZadatak);
         }
 
         if (++brojOdgovorenihPitanja < zadaci.size()) {
@@ -193,6 +219,15 @@ public class PitanjeController implements Initializable {
         }
         unesenaMatrica.setVrijednosti(arr);
         return unesenaMatrica;
+    }
+
+    private SlovoUzOdgovor procitajUneseniDouble(){
+        RadioButton selectedButton = (RadioButton) odgovori.getSelectedToggle();
+        String selectedButtonValue = selectedButton.getId();
+        if(selectedButtonValue.equals("a")) return SlovoUzOdgovor.a;
+        else if(selectedButtonValue.equals("b")) return SlovoUzOdgovor.b;
+        else if(selectedButtonValue.equals("c")) return SlovoUzOdgovor.c;
+        return SlovoUzOdgovor.d;
     }
 
     public void onOdustani(MouseEvent mouseEvent) {

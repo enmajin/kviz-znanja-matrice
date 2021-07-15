@@ -187,8 +187,6 @@ public class PitanjeController implements Initializable {
                 }
             }
         }
-        String[] bezZareza = vrijednosti.split(","); //ovo neće trebat lol
-        for(int i=0; i<dimenzija*dimenzija; i++)    arr[i] = Double.parseDouble(bezZareza[i]);
         unesenaMatrica.setVrijednosti(arr);
         return unesenaMatrica;
     }

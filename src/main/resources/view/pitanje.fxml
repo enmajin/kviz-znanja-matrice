@@ -17,6 +17,7 @@
          <children>
             <HBox alignment="TOP_CENTER" prefHeight="55.0" prefWidth="600.0" spacing="100.0">
                <children>
+                  <Text fx:id="imekorisnika" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="52.0" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Kviz znanja - Matrice">
                      <HBox.margin>
                         <Insets />

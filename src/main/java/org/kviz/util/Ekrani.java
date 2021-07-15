@@ -4,6 +4,7 @@ import org.kviz.controller.*;
 
 public enum Ekrani {
     POCETNA(PocetnaController.class),
+    POCETNAKORISNIK(PocetnakorisnikController.class),
     PITANJE(PitanjeController.class),
     RANG(RangController.class),
     REGISTRACIJA(RegistracijaController.class),

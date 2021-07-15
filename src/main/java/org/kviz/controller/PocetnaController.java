@@ -43,7 +43,8 @@ public class PocetnaController implements Initializable {
     }
 
     public void onLogIn(MouseEvent mouseEvent) {
-        alertMetodaNijeImplementirana.show(); // jos nemamo fxml za ovo
+        pocetnaService.promijeniEkran(pocetnaAnchorPane, Ekrani.LOGIN, null);
+//        alertMetodaNijeImplementirana.show(); // jos nemamo fxml za ovo
 //        pocetnaService.promijeniEkran(pocetna, ViewEnum.LOGIN);
     }
 }

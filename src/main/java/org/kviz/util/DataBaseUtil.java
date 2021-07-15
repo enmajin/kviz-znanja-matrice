@@ -2,9 +2,11 @@ package org.kviz.util;
 
 import org.kviz.model.Korisnik;
 import org.kviz.model.Matrica;
+import org.kviz.model.Rezultat;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -263,4 +265,32 @@ public class DataBaseUtil {
         return id;
     }
 
+    public ArrayList<Rezultat> dohvatiNajboljeRezultate() {
+        ArrayList<Rezultat> rezultati = new ArrayList<>();
+        String upit = "SELECT ROW_NUMBER() OVER (" +
+                "ORDER BY najbolji_rezultat DESC" +
+                ") rang, id, lozinka, ime, najbolji_rezultat FROM Korisnik " +
+                "ORDER BY najbolji_rezultat DESC LIMIT 10";
+        try (Connection conn = connect()) {
+            if (conn != null) {
+                try {
+                    Statement stm = conn.createStatement();
+                    ResultSet rezultat = stm.executeQuery(upit);
+                    while (rezultat.next()) {
+                        String  ime = rezultat.getString("ime");
+                        int  najboljiRezultat = rezultat.getInt("najbolji_rezultat");
+                        int rang = rezultat.getInt("rang");
+                        rezultati.add(new Rezultat(ime, najboljiRezultat, Duration.ofMillis(0), rang));
+                    }
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                    return null;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+        return rezultati;
+    }
 }

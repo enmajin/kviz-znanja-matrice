@@ -1,6 +1,7 @@
 package org.kviz.service;
 
 import org.kviz.model.Rezultat;
+import org.kviz.repository.RangRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

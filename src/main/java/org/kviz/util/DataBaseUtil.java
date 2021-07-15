@@ -89,7 +89,7 @@ public class DataBaseUtil {
         }
     }
 
-    private void dodaj_korisnike(int i, String loz, String im, int naj_rez) {
+    public void dodaj_korisnike(int i, String loz, String im, int naj_rez) {
         String upit = "INSERT INTO Korisnik (id, lozinka, ime, najbolji_rezultat) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = connect()) {
@@ -212,4 +212,55 @@ public class DataBaseUtil {
         }
         return matrica;
     }
+
+    public Korisnik dohvatiKorisnika(String loz, String im) {
+        Korisnik korisnik = new Korisnik();
+
+        String upit = "SELECT id, lozinka, ime, najbolji_rezultat FROM Korisnik " +
+                "WHERE lozinka = ? AND ime = ? ";
+
+        try (Connection conn = connect()) {
+            if (conn != null) {
+                try {
+                    PreparedStatement prep = conn.prepareStatement(upit);
+                    prep.setString(1, loz);
+                    prep.setString(2, im);
+                    ResultSet rezultat = prep.executeQuery();
+                    korisnik = new Korisnik(
+                            rezultat.getInt("id"),
+                            rezultat.getString("lozinka"),
+                            rezultat.getString("ime"),
+                            rezultat.getInt("najbolji_rezultat")
+                    );
+                } catch (SQLException e) {
+                    //todo dodati logiranje exceptiona
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return korisnik;
+    }
+
+    public int max_id(){
+        String upit = "SELECT MAX(id) as id FROM Korisnik";
+        int id = 0;
+        try (Connection conn = connect()) {
+            if (conn != null) {
+                try {
+                    Statement stm = conn.createStatement();
+                    ResultSet rezultat = stm.executeQuery(upit);
+                    id = rezultat.getInt("id");
+
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return id;
+    }
+
 }

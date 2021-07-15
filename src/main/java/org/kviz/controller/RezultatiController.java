@@ -25,6 +25,7 @@ import java.util.ResourceBundle;
 @FxmlView("/view/rezultati.fxml")
 public class RezultatiController implements Initializable {
     private static final int BROJ_ZADATAKA_U_KVIZU = 5;
+    private final RezultatiService rezultatiService;
     @FXML
     AnchorPane rezultatiAnchorPane;
     @FXML
@@ -39,7 +40,6 @@ public class RezultatiController implements Initializable {
     @FXML
     private Text bodovi;
     private int brojBodova;
-    private final RezultatiService rezultatiService;
     private Duration vrijeme;
 
     @Autowired

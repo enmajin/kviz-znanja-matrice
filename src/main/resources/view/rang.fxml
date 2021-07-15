@@ -6,20 +6,21 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.kviz.controller.RangController">
    <children>
       <Text layoutX="251.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rang lista">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <TableView layoutX="66.0" layoutY="74.0" prefHeight="304.0" prefWidth="476.0">
+      <TableView fx:id="rangTableView" layoutX="66.0" layoutY="74.0" prefHeight="304.0" prefWidth="476.0">
         <columns>
-          <TableColumn prefWidth="58.0" text="Rang" />
-          <TableColumn prefWidth="226.0" text="Username" />
-            <TableColumn prefWidth="75.0" text="Broj bodova" />
-            <TableColumn prefWidth="116.0" text="Vrijeme rješavanja" />
+          <TableColumn fx:id="rang" prefWidth="58.0" text="Rang" />
+          <TableColumn fx:id="username" prefWidth="173.0" text="Username" />
+            <TableColumn fx:id="brojBodova" prefWidth="128.0" text="Broj bodova" />
+            <TableColumn fx:id="vrijemeRjesavanja" prefWidth="116.0" text="Vrijeme rješavanja" />
         </columns>
       </TableView>
    </children>

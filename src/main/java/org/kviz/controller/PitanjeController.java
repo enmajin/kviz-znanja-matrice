@@ -196,6 +196,9 @@ public class PitanjeController implements Initializable {
     }
 
     public void onOdustani(MouseEvent mouseEvent) {
-        pitanjeService.promijeniEkran(pitanjeAnchorPane, Ekrani.POCETNA, null);
+        if(User.korisnickoIme == "")
+            pitanjeService.promijeniEkran(pitanjeAnchorPane, Ekrani.POCETNA, null);
+        else
+            pitanjeService.promijeniEkran(pitanjeAnchorPane, Ekrani.POCETNAKORISNIK, null);
     }
 }

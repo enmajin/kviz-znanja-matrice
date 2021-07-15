@@ -8,13 +8,13 @@
 <AnchorPane fx:id="pocetnakorisnikAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kviz.controller.PocetnakorisnikController">
     <children>
         <Button layoutX="516.0" layoutY="23.0" mnemonicParsing="false" onMouseClicked="#onLogOut" text="Log Out" />
-        <Text layoutX="140.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="KVIZ ZNANJA - MATRICE">
+        <Text layoutX="140.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="KVIZ ZNANJA - MATRICE">
             <font>
                 <Font size="29.0" />
             </font>
         </Text>
         <Button layoutX="257.0" layoutY="226.0" mnemonicParsing="false" onMouseClicked="#onKviz" text="Započni kviz" />
-      <Text fx:id="korisnikMessage" layoutX="185.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="228.21630859375">
+      <Text fx:id="korisnikMessage" layoutX="31.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="140.21630859375">
          <font>
             <Font size="24.0" />
          </font>

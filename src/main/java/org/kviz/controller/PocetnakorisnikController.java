@@ -5,9 +5,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.kviz.service.PocetnakorisnikService;
 import org.kviz.util.Ekrani;
+import org.kviz.util.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +24,8 @@ public class PocetnakorisnikController implements Initializable {
 
     @FXML
     private AnchorPane pocetnakorisnikAnchorPane;
+    @FXML
+    private Text korisnikMessage;
     private Alert alertMetodaNijeImplementirana;
 
     @Autowired
@@ -32,6 +36,7 @@ public class PocetnakorisnikController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         alertMetodaNijeImplementirana = new Alert(Alert.AlertType.WARNING, "Metoda nije implementirana.");
+        korisnikMessage.setText(User.korisnickoIme);
     }
 
     public void onKviz(MouseEvent mouseEvent) {

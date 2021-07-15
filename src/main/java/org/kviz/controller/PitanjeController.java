@@ -18,6 +18,7 @@ import net.rgielen.fxweaver.core.FxmlView;
 import org.kviz.model.*;
 import org.kviz.service.PitanjeService;
 import org.kviz.util.Ekrani;
+import org.kviz.util.User;
 import org.kviz.util.VrstaZadatka;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -54,6 +55,8 @@ public class PitanjeController implements Initializable {
     private HBox gumbiHbox;
     @FXML
     private Text vrijemeText;
+    @FXML
+    private Text imekorisnika;
 
 
     private ArrayList<Zadatak> zadaci;
@@ -77,6 +80,7 @@ public class PitanjeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        imekorisnika.setText(User.korisnickoIme);
         brojOdgovorenihPitanja = 0;
         zadaci = pitanjeService.generirajZadatke();
         trenutniZadatak = zadaci.get(0);

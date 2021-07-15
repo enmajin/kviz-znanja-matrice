@@ -8,6 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.kviz.service.PocetnaService;
 import org.kviz.util.Ekrani;
+import org.kviz.util.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -32,6 +33,7 @@ public class PocetnaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         alertMetodaNijeImplementirana = new Alert(Alert.AlertType.WARNING, "Metoda nije implementirana.");
+        User.korisnickoIme = "";
     }
 
     public void onProbniKviz(MouseEvent mouseEvent) {

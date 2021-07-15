@@ -10,6 +10,7 @@ import net.rgielen.fxweaver.core.FxmlView;
 import org.kviz.model.Korisnik;
 import org.kviz.util.DataBaseUtil;
 import org.kviz.util.Ekrani;
+import org.kviz.util.User;
 import org.springframework.stereotype.Component;
 
 import org.kviz.service.LoginService;
@@ -60,6 +61,7 @@ public class LoginController implements Initializable {
             if(korisnik.getId()==0)
                 loginMessage.setText(" Ne postoji! ");
             else {
+                User.ulogiraj(ime);
                 loginService.promijeniEkran(loginAnchorPane, Ekrani.POCETNAKORISNIK);
                 //korisnikMessage.setText(" Bok! ");
             }

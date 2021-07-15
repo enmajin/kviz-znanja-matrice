@@ -5,14 +5,20 @@ import java.util.List;
 
 public class Matrica {
     int dimenzija;
-    String vrijednosti;
+    double[] vrijednosti;
 
     public Matrica() {
     }
 
     public Matrica(String vrijednosti, int dimenzija) {
-        this.vrijednosti = vrijednosti;
         this.dimenzija = dimenzija;
+        double[] arr = new double[dimenzija*dimenzija];
+        String[] bezZareza = vrijednosti.split(",");
+
+        for(int i=0; i<dimenzija*dimenzija; i++)    arr[i] = Double.parseDouble(bezZareza[i]);
+
+        this.vrijednosti = arr;
+
     }
 
     public int getDimenzija() {
@@ -23,22 +29,20 @@ public class Matrica {
         this.dimenzija = dimenzija;
     }
 
-    public String getVrijednosti() {
+    public double[] getVrijednosti() {
         return vrijednosti;
     }
 
-    public void setVrijednosti(String vrijednosti) {
+    public void setVrijednosti(double[] vrijednosti) {
         this.vrijednosti = vrijednosti;
     }
 
     @Override
     public String toString() {
+
         String stringValue = "";
-        ArrayList<String> listaVrijednosti = new ArrayList<>(List.of(vrijednosti.split(",")));
-        listaVrijednosti.remove("");
-        listaVrijednosti.forEach(element -> element.trim());
         int i = 0;
-        for (String element : listaVrijednosti) {
+        for (double element : vrijednosti) {
             i += 1;
             stringValue += element;
             if (i % dimenzija == 0) {

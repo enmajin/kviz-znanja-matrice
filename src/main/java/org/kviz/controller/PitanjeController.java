@@ -172,14 +172,18 @@ public class PitanjeController implements Initializable {
 
     private Matrica procitajUnesenuMatricu() {
         Matrica unesenaMatrica = new Matrica();
-        unesenaMatrica.setDimenzija(dimenzijaMatriceRjesenja);
+        int dimenzija = dimenzijaMatriceRjesenja;
+        unesenaMatrica.setDimenzija(dimenzija);
+        double[] arr = new double[dimenzija*dimenzija];
         String vrijednosti = "";
         for (Node red : unosMatriceVBox.getChildren()) {
             for (Node textField : ((HBox) red).getChildren()) {
                 vrijednosti += ((TextField) textField).getText().trim() + ','; //todo: dodati validaciju (da su sve brojevi...)
             }
         }
-        unesenaMatrica.setVrijednosti(vrijednosti);
+        String[] bezZareza = vrijednosti.split(","); //ovo neće trebat lol
+        for(int i=0; i<dimenzija*dimenzija; i++)    arr[i] = Double.parseDouble(bezZareza[i]);
+        unesenaMatrica.setVrijednosti(arr);
         return unesenaMatrica;
     }
 

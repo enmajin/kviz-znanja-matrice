@@ -117,7 +117,7 @@ public class PitanjeController implements Initializable {
             for (int i = 0; i < dimenzijaMatriceRjesenja; i++) {
                 HBox red = new HBox(5);
                 for (int j = 0; j < dimenzijaMatriceRjesenja; j++) {
-                    TextField element = new TextField();
+                    TextField element = new TextField("0");
                     element.setId(i + "-" + j);
                     red.getChildren().add(element);
                 }
@@ -175,10 +175,16 @@ public class PitanjeController implements Initializable {
         int dimenzija = dimenzijaMatriceRjesenja;
         unesenaMatrica.setDimenzija(dimenzija);
         double[] arr = new double[dimenzija*dimenzija];
-        String vrijednosti = "";
+        int i = 0;
         for (Node red : unosMatriceVBox.getChildren()) {
             for (Node textField : ((HBox) red).getChildren()) {
-                vrijednosti += ((TextField) textField).getText().trim() + ','; //todo: dodati validaciju (da su sve brojevi...)
+                String element = ((TextField) textField).getText();
+                if (element.equals("")) {
+                    arr[i++] = 0;
+                }
+                else {
+                    arr[i++] = Double.parseDouble(element);
+                }
             }
         }
         String[] bezZareza = vrijednosti.split(","); //ovo neće trebat lol

@@ -20,7 +20,7 @@ public class JavaFXApplication extends Application {
     public void init() {
         String[] args = getParameters().getRaw().toArray(new String[0]);
         applicationContext = new SpringApplicationBuilder(MainApplication.class).run(args);
-        //proba dafsadasdas
+        //proba dafsadasdas dfasf
     }
 
     @Override

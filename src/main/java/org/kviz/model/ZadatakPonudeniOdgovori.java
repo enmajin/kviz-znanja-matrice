@@ -5,14 +5,14 @@ import org.kviz.util.SlovoUzOdgovor;
 import java.util.Map;
 
 public class ZadatakPonudeniOdgovori extends Zadatak {
-    Map<SlovoUzOdgovor, Matrica> ponudeniOdgovori;
+    Map<SlovoUzOdgovor, Double> ponudeniOdgovori;
 
     SlovoUzOdgovor ispravnoRjesenje;
     SlovoUzOdgovor korisnikovoRjesenje;
 
     public ZadatakPonudeniOdgovori(
             String pitanje, Matrica matrica1, Matrica matrica2, Map<SlovoUzOdgovor,
-            Matrica> ponudeniOdgovori, SlovoUzOdgovor ispravnoRjesenje, SlovoUzOdgovor korisnikovoRjesenje
+            Double> ponudeniOdgovori, SlovoUzOdgovor ispravnoRjesenje, SlovoUzOdgovor korisnikovoRjesenje
     ) {
         super(pitanje, matrica1, matrica2);
         this.ponudeniOdgovori = ponudeniOdgovori;
@@ -23,11 +23,11 @@ public class ZadatakPonudeniOdgovori extends Zadatak {
     public ZadatakPonudeniOdgovori() {
     }
 
-    public Map<SlovoUzOdgovor, Matrica> getPonudeniOdgovori() {
+    public Map<SlovoUzOdgovor, Double> getPonudeniOdgovori() {
         return ponudeniOdgovori;
     }
 
-    public void setPonudeniOdgovori(Map<SlovoUzOdgovor, Matrica> ponudeniOdgovori) {
+    public void setPonudeniOdgovori(Map<SlovoUzOdgovor, Double> ponudeniOdgovori) {
         this.ponudeniOdgovori = ponudeniOdgovori;
     }
 

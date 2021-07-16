@@ -4,20 +4,15 @@ import javafx.scene.Node;
 import javafx.stage.Stage;
 import org.ejml.simple.SimpleMatrix;
 import org.kviz.controller.RezultatiController;
-import org.kviz.model.InfoZaRezultateDto;
-import org.kviz.model.Matrica;
-import org.kviz.model.Zadatak;
-import org.kviz.model.ZadatakMatricaOdgovor;
+import org.kviz.model.*;
 import org.kviz.repository.PitanjeRepository;
 import org.kviz.util.Ekrani;
+import org.kviz.util.SlovoUzOdgovor;
 import org.kviz.view.SceneManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
+import java.util.*;
 
 
 @Service
@@ -27,8 +22,9 @@ public class PitanjeService {
     private static final int BROJ_ZADATAKA_U_KVIZU = 5;
 
     private enum Operacije {
-        ZBROJI("Zbroji")/*, ODUZMI("Oduzmi")*/, POMNOZI("Pomnoži"),
-        INVERZ("Inverz");
+        ZBROJI("Zbroji"), POMNOZI("Pomnoži"),
+        TRANSPONIRAJ("Transponiraj"), INVERZ("Inverz"),
+        DETERMINANTA("Determinanta");
 
 
         private final String value;
@@ -64,15 +60,15 @@ public class PitanjeService {
 
         for (int i=0; i<BROJ_ZADATAKA_U_KVIZU; i++) {
             Zadatak zadatak = null;
-            while(zadatak == null) zadatak = generirajZadatakRjesenjeMatrica();
-            zadaci.add(zadatak);  //todo: dodati i generiranje zadatka s ponudenim odgovorom
+            while(zadatak == null) zadatak = generirajZadatakRjesenjeMatrica(i);
+            zadaci.add(zadatak);
         }
         return zadaci;
     }
 
-    private Zadatak generirajZadatakRjesenjeMatrica(){
+    private Zadatak generirajZadatakRjesenjeMatrica(int i){
         Random rnd = new Random();
-        Operacije operacije = LISTA_PITANJA.get(rnd.nextInt(LISTA_PITANJA.size()));
+        Operacije operacije = LISTA_PITANJA.get(i);
         String pitanje =  operacije.getValue() + " matrice";
 
         int n = 1;
@@ -81,20 +77,39 @@ public class PitanjeService {
         }
         Matrica matrica1 = pitanjeRepository.dohvatiMatricuDimenzijeN(n);
         Matrica matrica2 = pitanjeRepository.dohvatiMatricuDimenzijeN(n);
-        Matrica ispravnoRjesenje = izracunaj(matrica1, operacije, matrica2);
-        if(ispravnoRjesenje == null) return null;
-        else return new ZadatakMatricaOdgovor(pitanje, matrica1, matrica2, ispravnoRjesenje, new Matrica());
-    }
-
-    private Matrica izracunaj(Matrica matrica1, Operacije operacije, Matrica matrica2) {
-        if(operacije == Operacije.ZBROJI)    return zbroji(matrica1, matrica2);
-        //if(operacije == Operacije.ODUZMI)    return oduzmi(matrica1, matrica2);
-        if(operacije == Operacije.POMNOZI)   return pomnozi(matrica1, matrica2);
-        return inverz(matrica1);
+        Matrica ispravnoRjesenjeMatrica;
+        double ispravnoRjesenjeDouble;
+        if(operacije == Operacije.ZBROJI){
+            ispravnoRjesenjeMatrica = zbroji(matrica1, matrica2);
+            return new ZadatakMatricaOdgovor(pitanje, matrica1, matrica2, ispravnoRjesenjeMatrica, new Matrica());
+        }
+        else if(operacije == Operacije.POMNOZI){
+            ispravnoRjesenjeMatrica = pomnozi(matrica1, matrica2);
+            return new ZadatakMatricaOdgovor(pitanje, matrica1, matrica2, ispravnoRjesenjeMatrica, new Matrica());
+        }
+        else if(operacije == Operacije.TRANSPONIRAJ){
+            ispravnoRjesenjeMatrica = transponiraj(matrica1);
+            return new ZadatakMatricaOdgovor(pitanje, matrica1, null, ispravnoRjesenjeMatrica, new Matrica());
+        }
+        else if(operacije == Operacije.INVERZ){
+            ispravnoRjesenjeMatrica = inverz(matrica1);
+            if(ispravnoRjesenjeMatrica == null) return null;
+            return new ZadatakMatricaOdgovor(pitanje, matrica1, null, ispravnoRjesenjeMatrica, new Matrica());
+        }
+        else ispravnoRjesenjeDouble = determinanta(matrica1);
+        SlovoUzOdgovor randomSlovo = slucajnoSlovo();
+        Map<SlovoUzOdgovor, Double> ponudeniOdgovori = new HashMap<>();
+        ponudeniOdgovori.put(SlovoUzOdgovor.a, slucajanOdgovor(ispravnoRjesenjeDouble));
+        ponudeniOdgovori.put(SlovoUzOdgovor.b, slucajanOdgovor(ispravnoRjesenjeDouble));
+        ponudeniOdgovori.put(SlovoUzOdgovor.c, slucajanOdgovor(ispravnoRjesenjeDouble));
+        ponudeniOdgovori.put(SlovoUzOdgovor.d, slucajanOdgovor(ispravnoRjesenjeDouble));
+        ponudeniOdgovori.put(randomSlovo, ispravnoRjesenjeDouble); //updateaj mapu sa točnim rješenjem
+        return new ZadatakPonudeniOdgovori(pitanje, matrica1, null, ponudeniOdgovori, randomSlovo, null);
     }
 
     private Matrica zbroji(Matrica matrica1, Matrica matrica2){
-        Matrica zbroj = matrica1;
+        Matrica zbroj = new Matrica();
+        zbroj.setDimenzija(matrica1.getDimenzija());
         SimpleMatrix M1 = new SimpleMatrix(matrica1.getDimenzija(),matrica1.getDimenzija(),true,matrica1.getVrijednosti());
         SimpleMatrix M2 = new SimpleMatrix(matrica2.getDimenzija(),matrica2.getDimenzija(),true,matrica2.getVrijednosti());
         SimpleMatrix M = M1.plus(M2);
@@ -102,17 +117,9 @@ public class PitanjeService {
         return zbroj;
     }
 
-    /*private Matrica oduzmi(Matrica matrica1, Matrica matrica2){
-        Matrica razlika = matrica1;
-        SimpleMatrix M1 = new SimpleMatrix(matrica1.getDimenzija(),matrica1.getDimenzija(),true,matrica1.getVrijednosti());
-        SimpleMatrix M2 = new SimpleMatrix(matrica1.getDimenzija(),matrica1.getDimenzija(),true,matrica2.getVrijednosti());
-        SimpleMatrix M = M1.minus(M2);
-        razlika.setVrijednosti(konvertiraj(M));
-        return razlika;
-    }*/
-
     private Matrica pomnozi(Matrica matrica1, Matrica matrica2){
-        Matrica produkt = matrica1;
+        Matrica produkt = new Matrica();
+        produkt.setDimenzija(matrica1.getDimenzija());
         SimpleMatrix M1 = new SimpleMatrix(matrica1.getDimenzija(),matrica1.getDimenzija(),true,matrica1.getVrijednosti());
         SimpleMatrix M2 = new SimpleMatrix(matrica2.getDimenzija(),matrica2.getDimenzija(),true,matrica2.getVrijednosti());
         SimpleMatrix M = M1.mult(M2);
@@ -120,8 +127,26 @@ public class PitanjeService {
         return produkt;
     }
 
+    private Matrica transponiraj(Matrica matrica1){
+        Matrica transponirana = new Matrica();
+        transponirana.setDimenzija(matrica1.getDimenzija());
+        SimpleMatrix M1 = new SimpleMatrix(matrica1.getDimenzija(),matrica1.getDimenzija(),true,matrica1.getVrijednosti());
+        SimpleMatrix M = M1.transpose();
+        transponirana.setVrijednosti(konvertiraj(M));
+        return transponirana;
+    }
+
+    private double determinanta(Matrica matrica1){
+        Matrica deter = new Matrica();
+        deter.setDimenzija(matrica1.getDimenzija());
+        SimpleMatrix M1 = new SimpleMatrix(matrica1.getDimenzija(),matrica1.getDimenzija(),true,matrica1.getVrijednosti());
+        double d = M1.determinant();
+        return d;
+    }
+
     private Matrica inverz(Matrica matrica1){
-        Matrica inv = matrica1;
+        Matrica inv = new Matrica();
+        inv.setDimenzija(matrica1.getDimenzija());
         SimpleMatrix M1 = new SimpleMatrix(matrica1.getDimenzija(),matrica1.getDimenzija(),true,matrica1.getVrijednosti());
         try{
             SimpleMatrix M = M1.invert();
@@ -144,5 +169,22 @@ public class PitanjeService {
             }
         }
         return produktArr;
+    }
+
+    private SlovoUzOdgovor slucajnoSlovo(){
+        Random r = new Random();
+        int index = r.nextInt(4 - 0) + 0;
+        if(index == 0)  return SlovoUzOdgovor.a;
+        if(index == 1)  return SlovoUzOdgovor.b;
+        if(index == 2)  return SlovoUzOdgovor.c;
+        else    return SlovoUzOdgovor.d;
+    }
+
+    private double slucajanOdgovor(double tocanOdgovor){
+        Random r = new Random();
+        int min = (int)tocanOdgovor - 10;
+        int max = (int)tocanOdgovor + 10;
+        int odg = r.nextInt(max - min) + min;
+        return odg;
     }
 }

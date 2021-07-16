@@ -1,0 +1,22 @@
+
+
+.naslov{
+    -fx-font-size: 25px;
+    -fx-font-family: "Times New Roman", Times, serif;
+}
+
+.ime {
+    -fx-font-size: 25px;
+    -fx-font-family: "Times New Roman", Times, serif;
+}
+
+#gumb{
+    -fx-padding: 10px;
+}
+
+.glavni {
+    -fx-background-color: lightblue;
+}
+
+.header {
+}

@@ -1,19 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:id="pocetnaAnchorPane" fx:controller="org.kviz.controller.PocetnaController">
+<AnchorPane fx:id="pocetnaAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kviz.controller.PocetnaController">
    <children>
-      <Button layoutX="516.0" layoutY="23.0" mnemonicParsing="false" onMouseClicked="#onLogIn" text="Log In" />
-      <Button layoutX="394.0" layoutY="23.0" mnemonicParsing="false" onMouseClicked="#onRegistrirajSe" text="Registriraj se" />
-      <Text layoutX="140.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="KVIZ ZNANJA - MATRICE">
-         <font>
-            <Font size="29.0" />
-         </font>
-      </Text>
-      <Button layoutX="238.0" layoutY="187.0" mnemonicParsing="false" onMouseClicked="#onProbniKviz" text="Započni probni kviz" />
+      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" styleClass="glavni" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="562.0" styleClass="header">
+               <children>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="892.0">
+                     <children>
+                        <Button mnemonicParsing="false" onMouseClicked="#onLogIn" prefWidth="51.0" text="Log In" />
+                        <HBox prefHeight="100.0" prefWidth="27.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="524.0">
+                     <children>
+                        <Button mnemonicParsing="false" onMouseClicked="#onRegistrirajSe" text="Registriraj se" textAlignment="RIGHT" />
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Text styleClass="naslov" strokeType="OUTSIDE" strokeWidth="0.0" text="KVIZ ZNANJA - MATRICE" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="333.1982421875" HBox.hgrow="SOMETIMES">
+                     <font>
+                        <Font size="29.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" />
+            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button id="gumb" mnemonicParsing="false" onMouseClicked="#onProbniKviz" text="Započni probni kviz" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
    </children>
+   <stylesheets>
+      <URL value="@styles.css" />
+   </stylesheets>
 </AnchorPane>

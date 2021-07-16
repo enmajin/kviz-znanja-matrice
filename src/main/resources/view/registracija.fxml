@@ -4,26 +4,68 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import java.net.URL?>
 <AnchorPane fx:id="registracijaAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kviz.controller.RegistracijaController">
    <children>
-      <TextField fx:id="nameTextField" layoutX="220.0" layoutY="97.0" promptText="Ime" />
-      <Text layoutX="184.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ime" />
-      <Text layoutX="124.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ponovi zaporku" />
-      <Text layoutX="230.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registracija">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Text>
-      <Button layoutX="206.0" layoutY="302.0" mnemonicParsing="false" onAction="#regButtonOnAction" text="Registriraj se" />
-      <Button fx:id="cancelButton" layoutX="313.0" layoutY="302.0" mnemonicParsing="false" onMouseClicked="#oncancelButton" text="Odustani" />
-      <TextField fx:id="lastnameTextField" layoutX="220.0" layoutY="142.0" promptText="Prezime" />
-      <Text layoutX="164.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prezime" />
-      <Text fx:id="regMessage" fill="#ed0a0a" layoutX="184.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="217.423828125" />
-      <PasswordField fx:id="enteragainPasswordField" layoutX="220.0" layoutY="234.0" promptText="Ponovi zaporku" />
-      <PasswordField fx:id="enterPasswordField" layoutX="220.0" layoutY="187.0" promptText="Zaporka" />
-      <Text layoutX="161.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zaporka" />
+      <VBox styleClass="glavni" alignment="CENTER" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="69.0" prefWidth="600.0">
+               <children>
+                  <Text styleClass="naslov" strokeType="OUTSIDE" strokeWidth="0.0" text="Registracija">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="47.0" prefWidth="600.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ime" textAlignment="CENTER" wrappingWidth="103.0205078125" />
+                  <TextField fx:id="nameTextField" promptText="Ime" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="61.0" prefWidth="600.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Prezime" textAlignment="CENTER" wrappingWidth="103.03369140625" />
+                  <TextField fx:id="lastnameTextField" promptText="Prezime" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="54.0" prefWidth="600.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Zaporka" textAlignment="CENTER" wrappingWidth="102.423828125" />
+                  <PasswordField fx:id="enterPasswordField" promptText="Zaporka" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="52.0" prefWidth="600.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ponovi zaporku" textAlignment="CENTER" wrappingWidth="101.59228515625" />
+                  <PasswordField fx:id="enteragainPasswordField" promptText="Ponovi zaporku" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="36.0" prefWidth="600.0">
+               <children>
+                  <Text fx:id="regMessage" fill="#ed0a0a" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="217.423828125" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="94.0" prefWidth="600.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#regButtonOnAction" text="Registriraj se" />
+                  <HBox alignment="CENTER" prefHeight="93.0" prefWidth="85.0">
+                     <children>
+                        <Button fx:id="cancelButton" mnemonicParsing="false" onMouseClicked="#oncancelButton" text="Odustani" />
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
    </children>
+   <stylesheets>
+      <URL value="@styles.css" />
+   </stylesheets>
 </AnchorPane>

@@ -40,15 +40,15 @@ public class DataBaseUtil {
         kreiraj_tablicu(matrica);
 
         dodaj_korisnike(1, "perinasifra", "Pero", 0);
-        dodaj_korisnike(2, "mirkovasifra", "Mirko", 6);
-        dodaj_korisnike(3, "slavkovasifra", "Slavko", 2);
-        dodaj_korisnike(4, "darkovasifra", "Darko", 1);
-        dodaj_korisnike(5, "ivinasifra", "Ivo", 7);
-        dodaj_korisnike(6, "aninaasifra", "Ana", 6);
-        dodaj_korisnike(7, "majinasifra", "Maja", 5);
-        dodaj_korisnike(8, "ružinasifra", "Ruža", 10);
+        dodaj_korisnike(2, "mirkovasifra", "Mirko", 2);
+        dodaj_korisnike(3, "slavkovasifra", "Slavko", 1);
+        dodaj_korisnike(4, "darkovasifra", "Darko", 3);
+        dodaj_korisnike(5, "ivinasifra", "Ivo", 4);
+        dodaj_korisnike(6, "aninaasifra", "Ana", 2);
+        dodaj_korisnike(7, "majinasifra", "Maja", 2);
+        dodaj_korisnike(8, "ružinasifra", "Ruža", 5);
         dodaj_korisnike(9, "petrinasifra", "Petra", 4);
-        dodaj_korisnike(10, "teninasifra", "Tena", 9);
+        dodaj_korisnike(10, "teninasifra", "Tena", 4);
 
         for (int i = 0; i < 10; i++) { //napravi 10 matrica dimenzija 2x2
             int dimenzija = 2;
@@ -292,5 +292,46 @@ public class DataBaseUtil {
             return null;
         }
         return rezultati;
+    }
+
+    public int dohvatiNajboljiRezultat(String username){
+        String upit = "SELECT rang, id, lozinka, ime, najbolji_rezultat FROM Korisnik WHERE name = ?";
+        int najboljiRezultat = 0;
+        try (Connection conn = connect()) {
+            if (conn != null) {
+                try {
+                    PreparedStatement prep = conn.prepareStatement(upit);
+                    prep.setString(1,username);
+                    ResultSet rezultat = prep.executeQuery(upit);
+                    najboljiRezultat = rezultat.getInt("najbolji_rezultat");
+
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                    return -1;
+                }
+            }
+
+        }catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return -1;
+        }
+        return najboljiRezultat;
+    }
+
+    public void ažurirajNajboljiRezultat(String username, int rezultat){
+        String upit = "UPDATE table Korisnik SET najbolji_rezultat = ? WHERE ime = ?";
+        try (Connection conn = connect()) {
+            if (conn != null) {
+                try {
+                    PreparedStatement prep = conn.prepareStatement(upit);
+                    prep.setInt(1, rezultat);
+                    prep.setString(2,username);
+                    prep.executeUpdate();
+                } catch (SQLException e) {
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

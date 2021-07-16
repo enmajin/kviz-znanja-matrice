@@ -8,6 +8,11 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.verify;
+import static org.mockito.internal.verification.VerificationModeFactory.times;
+
 @SpringBootTest
 public class RegistracijaServiceTest {
     @Mock
@@ -25,7 +30,8 @@ public class RegistracijaServiceTest {
 
     @Test
     public void dodaj_korisnike() {
-        registracijaService.dodajKorisnika(Mockito.anyInt(),"", "", 0);
+        registracijaService.dodajKorisnika(100,"", "", 0);
+        verify(registracijaRepository, times(1)).dodajKorisnika(100,"", "", 0);
     }
 
 }

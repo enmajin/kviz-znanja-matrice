@@ -16,7 +16,7 @@
                <children>
                   <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="892.0">
                      <children>
-                        <Button mnemonicParsing="false" onMouseClicked="#onLogIn" prefWidth="51.0" text="Log In" />
+                        <Button mnemonicParsing="false" onMouseClicked="#onLogIn" prefHeight="24.0" prefWidth="72.0" text="Log In" />
                         <HBox prefHeight="100.0" prefWidth="27.0" />
                      </children>
                   </HBox>
@@ -29,7 +29,7 @@
             </HBox>
             <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Text styleClass="naslov" strokeType="OUTSIDE" strokeWidth="0.0" text="KVIZ ZNANJA - MATRICE" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="333.1982421875" HBox.hgrow="SOMETIMES">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="naslov" text="KVIZ ZNANJA - MATRICE" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="333.1982421875" HBox.hgrow="SOMETIMES">
                      <font>
                         <Font size="29.0" />
                      </font>

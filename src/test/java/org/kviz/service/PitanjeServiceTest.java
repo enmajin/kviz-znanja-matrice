@@ -39,7 +39,7 @@ public class PitanjeServiceTest {
 
         ArrayList<Zadatak> zadaci = pitanjeService.generirajZadatke();
 
-        verify(pitanjeRepository, times(10)).dohvatiMatricuDimenzijeN(anyInt());
+        verify(pitanjeRepository, atLeast(10)).dohvatiMatricuDimenzijeN(anyInt());
         assertThat(zadaci.size()).isEqualTo(5);
         for (Zadatak zadatak : zadaci) {
             assertThat(zadatak.getMatrica1()).isEqualTo(expectedMatrica);

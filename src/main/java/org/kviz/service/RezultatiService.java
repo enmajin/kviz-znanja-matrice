@@ -9,6 +9,8 @@ import org.kviz.view.SceneManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
+
 @Service
 public class RezultatiService {
     private SceneManager sceneManager;
@@ -35,5 +37,13 @@ public class RezultatiService {
 
     public void ažurirajNajboljiRezultat(String username, int rezultat){
         dataBaseUtil.ažurirajNajboljiRezultat(username,rezultat);
+    }
+
+    /*public int dohvatiVrijeme(String username){
+       return dataBaseUtil.dohvatiVrijeme(username);
+    }*/
+
+    public void ažurirajVrijeme(String username, Duration vrijeme){
+        dataBaseUtil.ažurirajVrijeme(username, vrijeme);
     }
 }

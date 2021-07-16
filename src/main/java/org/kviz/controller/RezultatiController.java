@@ -28,6 +28,9 @@ import java.util.ResourceBundle;
 public class RezultatiController implements Initializable {
     private static final int BROJ_ZADATAKA_U_KVIZU = 5;
     private final RezultatiService rezultatiService;
+    private int najboljiRezultat;
+    private int najboljeVrijeme;
+
     @FXML
     AnchorPane rezultatiAnchorPane;
     @FXML
@@ -38,7 +41,6 @@ public class RezultatiController implements Initializable {
     TableColumn ispravniOdgovori;
     @FXML
     TableView odgovori;
-    private int najboljiRezultat;
     private ArrayList<Zadatak> zadaci;
     @FXML
     private Text bodovi;
@@ -77,6 +79,7 @@ public class RezultatiController implements Initializable {
         if (User.ulogiran) {
             if (brojBodova > najboljiRezultat) {
                 rezultatiService.ažurirajNajboljiRezultat(User.korisnickoIme, brojBodova);
+                rezultatiService.ažurirajVrijeme(User.korisnickoIme, vrijeme);
             }
         }
         //todo: spremiti broj bodova u bazu ako je veci od osobnog rekorda (mozda i vrijeme?)

@@ -39,7 +39,7 @@ public class HistogramService {
             caller.setGraphicsTheme(new SkyTheme());
             RCode code = RCode.create();
 
-            double[] numbers = new double[]{1, 4, 3, 5, 6, 10}; //todo ovdje napraviti array stvarnih podataka
+            double[] numbers = new double[]{1, 4, 3, 5, 6, 10};
 
             code.addDoubleArray("x", numbers);
 

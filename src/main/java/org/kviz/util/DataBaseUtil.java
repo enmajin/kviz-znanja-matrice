@@ -207,7 +207,6 @@ public class DataBaseUtil {
                             rezultat.getInt("dimenzija")
                     );
                 } catch (SQLException e) {
-                    //todo dodati logiranje exceptiona
                 }
             }
         } catch (SQLException e) {
@@ -236,7 +235,6 @@ public class DataBaseUtil {
                             rezultat.getInt("najbolji_rezultat")
                     );
                 } catch (SQLException e) {
-                    //todo dodati logiranje exceptiona
                 }
             }
         } catch (SQLException e) {
@@ -368,8 +366,7 @@ public class DataBaseUtil {
         long seconds = vrijeme.getSeconds();
         long absSeconds = Math.abs(seconds);
         String v = String.format(
-                "%d:%02d:%02d",
-                absSeconds / 3600,
+                "%02d:%02d",
                 (absSeconds % 3600) / 60,
                 absSeconds % 60);
 

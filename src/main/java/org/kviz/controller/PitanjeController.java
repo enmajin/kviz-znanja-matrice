@@ -155,9 +155,6 @@ public class PitanjeController implements Initializable {
                 String vrijednost_s = vrijednost + "";
                 value.setText(vrijednost_s);
             }
-
-        } else {
-            new Alert(Alert.AlertType.ERROR, "Greska u dohvacanju zadatka").show(); //todo: maknuti nakon testiranja
         }
     }
 

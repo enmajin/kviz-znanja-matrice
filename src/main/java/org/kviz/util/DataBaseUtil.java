@@ -28,6 +28,7 @@ public class DataBaseUtil {
                 + " lozinka varchar(60) NOT NULL ,\n"
                 + " ime varchar(60) NOT NULL ,\n"
                 + " najbolji_rezultat integer \n"
+                + " vrijeme varchar(60) \n"
                 + ");";
 
         String matrica = " CREATE TABLE IF NOT EXISTS Matrica (\n"
@@ -318,6 +319,30 @@ public class DataBaseUtil {
         return najboljiRezultat;
     }
 
+    /*public int dohvatiVrijeme(String username){
+        String upit = "SELECT rang, id, lozinka, ime, najbolji_rezultat, vrijeme FROM Korisnik WHERE name = ?";
+        int najboljeVrijeme = -1;
+        try (Connection conn = connect()) {
+            if (conn != null) {
+                try {
+                    PreparedStatement prep = conn.prepareStatement(upit);
+                    prep.setString(1,username);
+                    ResultSet rezultat = prep.executeQuery(upit);
+                    najboljeVrijeme = rezultat.getInt("vrijeme");
+
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                    return -1;
+                }
+            }
+
+        }catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return -1;
+        }
+        return najboljeVrijeme;
+    }*/
+
     public void ažurirajNajboljiRezultat(String username, int rezultat){
         String upit = "UPDATE table Korisnik SET najbolji_rezultat = ? WHERE ime = ?";
         try (Connection conn = connect()) {
@@ -325,6 +350,23 @@ public class DataBaseUtil {
                 try {
                     PreparedStatement prep = conn.prepareStatement(upit);
                     prep.setInt(1, rezultat);
+                    prep.setString(2,username);
+                    prep.executeUpdate();
+                } catch (SQLException e) {
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void ažurirajVrijeme(String username, Duration vrijeme){
+        String upit = "UPDATE table Korisnik SET vrijeme = ? WHERE ime = ?";
+        try (Connection conn = connect()) {
+            if (conn != null) {
+                try {
+                    PreparedStatement prep = conn.prepareStatement(upit);
+                    prep.setString(1, String.valueOf(vrijeme));
                     prep.setString(2,username);
                     prep.executeUpdate();
                 } catch (SQLException e) {

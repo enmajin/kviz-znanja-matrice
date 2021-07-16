@@ -45,14 +45,9 @@ public class HistogramService {
             caller.setGraphicsTheme(new SkyTheme());
             RCode code = RCode.create();
 
-<<<<<<< Updated upstream
-            double[] numbers = new double[]{1, 4, 3, 5, 6, 10};
-=======
-            double[] numbers; //todo ovdje napraviti array stvarnih podataka
             ArrayList<Rezultat> rezult = dohvatiNajboljeRezultate();
             int koliko = rezult.size();
             double[] rezultati = dohvatiRezultate(koliko);
->>>>>>> Stashed changes
 
             code.addDoubleArray("Rezultati", rezultati);
 

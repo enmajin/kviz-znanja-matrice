@@ -384,4 +384,33 @@ public class DataBaseUtil {
             System.out.println(e.getMessage());
         }
     }
+
+    public double[] dohvatiRezultate(int koliko) {
+        double[] rezultati = new double[koliko];
+        String upit = "SELECT ROW_NUMBER() OVER (" +
+                "ORDER BY najbolji_rezultat DESC" +
+                ") rang, id, lozinka, ime, najbolji_rezultat FROM Korisnik " +
+                "ORDER BY najbolji_rezultat DESC LIMIT 10";
+        try (Connection conn = connect()) {
+            if (conn != null) {
+                try {
+                    Statement stm = conn.createStatement();
+                    ResultSet rezultat = stm.executeQuery(upit);
+                    int i = 0;
+                    while (rezultat.next()) {
+                        int  najboljiRezultat = rezultat.getInt("najbolji_rezultat");
+                        rezultati[i]=(double)najboljiRezultat;
+                        i++;
+                    }
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                    return null;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+        return rezultati;
+    }
 }

@@ -14,7 +14,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="143.0" prefWidth="600.0">
                <children>
-                  <Text styleClass="ime" fx:id="korisnikMessage" fill="#457cfa" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="140.21630859375">
+                  <Text fx:id="korisnikMessage" fill="#457cfa" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="ime" textAlignment="CENTER" wrappingWidth="140.21630859375">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -40,8 +40,16 @@
                     <Button mnemonicParsing="false" onMouseClicked="#onKviz" text="Započni kviz" />
                </children>
             </HBox>
+<<<<<<< Updated upstream
              <Button layoutX="67.0" layoutY="286.0" mnemonicParsing="false" onMouseClicked="#onStupcastiGraf" text="Stupcasti graf rezultata" />
              <Button layoutX="67.0" layoutY="323.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="171.0" text="Prikaz rijesenosti zadataka" />
+=======
+            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                   <Button mnemonicParsing="false" onMouseClicked="#onStupcastiGraf" text="Stupčasti graf rezultata" />
+               </children>
+            </HBox>
+>>>>>>> Stashed changes
          </children>
       </VBox>
     </children>

@@ -2,7 +2,6 @@ package org.kviz.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -26,7 +25,6 @@ public class PocetnakorisnikController implements Initializable {
     private AnchorPane pocetnakorisnikAnchorPane;
     @FXML
     private Text korisnikMessage;
-    private Alert alertMetodaNijeImplementirana;
 
     @Autowired
     public PocetnakorisnikController(PocetnakorisnikService pocetnakorisnikService) {
@@ -35,7 +33,6 @@ public class PocetnakorisnikController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        alertMetodaNijeImplementirana = new Alert(Alert.AlertType.WARNING, "Metoda nije implementirana.");
         korisnikMessage.setText(User.korisnickoIme);
     }
 
@@ -45,5 +42,9 @@ public class PocetnakorisnikController implements Initializable {
 
     public void onLogOut(MouseEvent mouseEvent) {
         pocetnakorisnikService.promijeniEkran(pocetnakorisnikAnchorPane, Ekrani.POCETNA, null);
+    }
+
+    public void onStupcastiGraf(MouseEvent mouseEvent) {
+        pocetnakorisnikService.promijeniEkran(pocetnakorisnikAnchorPane, Ekrani.HISTOGRAM, null);
     }
 }

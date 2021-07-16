@@ -11,12 +11,9 @@ import javafx.scene.text.Text;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.kviz.model.InfoZaRezultateDto;
 import org.kviz.model.Zadatak;
-import org.kviz.service.RangService;
 import org.kviz.service.RezultatiService;
-import org.kviz.util.DataBaseUtil;
 import org.kviz.util.Ekrani;
 import org.kviz.util.User;
-import org.kviz.service.RangService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -31,8 +28,6 @@ import java.util.ResourceBundle;
 public class RezultatiController implements Initializable {
     private static final int BROJ_ZADATAKA_U_KVIZU = 5;
     private final RezultatiService rezultatiService;
-    private int najboljiRezultat;
-
     @FXML
     AnchorPane rezultatiAnchorPane;
     @FXML
@@ -43,6 +38,7 @@ public class RezultatiController implements Initializable {
     TableColumn ispravniOdgovori;
     @FXML
     TableView odgovori;
+    private int najboljiRezultat;
     private ArrayList<Zadatak> zadaci;
     @FXML
     private Text bodovi;
@@ -56,7 +52,8 @@ public class RezultatiController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        najboljiRezultat = rezultatiService.dohvatiNajboljiRezultat(User.korisnickoIme);
+        if (User.ulogiran)
+            najboljiRezultat = rezultatiService.dohvatiNajboljiRezultat(User.korisnickoIme);
     }
 
     public void setData(InfoZaRezultateDto data) {
@@ -77,8 +74,8 @@ public class RezultatiController implements Initializable {
                 }
         );
 
-        if(User.ulogiran){
-            if(brojBodova > najboljiRezultat){
+        if (User.ulogiran) {
+            if (brojBodova > najboljiRezultat) {
                 rezultatiService.ažurirajNajboljiRezultat(User.korisnickoIme, brojBodova);
             }
         }

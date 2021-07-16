@@ -40,9 +40,9 @@
                     <Button mnemonicParsing="false" onMouseClicked="#onKviz" text="Započni kviz" />
                </children>
             </HBox>
+             <Button layoutX="67.0" layoutY="286.0" mnemonicParsing="false" onMouseClicked="#onStupcastiGraf" text="Stupcasti graf rezultata" />
+             <Button layoutX="67.0" layoutY="323.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="171.0" text="Prikaz rijesenosti zadataka" />
          </children>
-          <Button layoutX="67.0" layoutY="286.0" mnemonicParsing="false" onMouseClicked="#onStupcastiGraf" text="Stupcasti graf rezultata" />
-          <Button layoutX="67.0" layoutY="323.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="171.0" text="Prikaz rijesenosti zadataka" />
       </VBox>
     </children>
     <stylesheets>

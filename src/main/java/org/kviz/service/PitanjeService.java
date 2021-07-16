@@ -152,7 +152,6 @@ public class PitanjeService {
             SimpleMatrix M = M1.invert();
             inv.setVrijednosti(konvertiraj(M));
         } catch(Exception e){
-            System.out.println(e);
             return null;
         }
 

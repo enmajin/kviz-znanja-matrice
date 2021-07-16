@@ -244,7 +244,7 @@ public class DataBaseUtil {
         return korisnik;
     }
 
-    public int max_id(){
+    public int max_id() {
         String upit = "SELECT MAX(id) as id FROM Korisnik";
         int id = 0;
         try (Connection conn = connect()) {
@@ -277,8 +277,8 @@ public class DataBaseUtil {
                     Statement stm = conn.createStatement();
                     ResultSet rezultat = stm.executeQuery(upit);
                     while (rezultat.next()) {
-                        String  ime = rezultat.getString("ime");
-                        int  najboljiRezultat = rezultat.getInt("najbolji_rezultat");
+                        String ime = rezultat.getString("ime");
+                        int najboljiRezultat = rezultat.getInt("najbolji_rezultat");
                         int rang = rezultat.getInt("rang");
                         rezultati.add(new Rezultat(ime, najboljiRezultat, Duration.ofMillis(0), rang));
                     }
@@ -294,44 +294,45 @@ public class DataBaseUtil {
         return rezultati;
     }
 
-    public int dohvatiNajboljiRezultat(String username){
-        String upit = "SELECT rang, id, lozinka, ime, najbolji_rezultat FROM Korisnik WHERE name = ?";
+    public int dohvatiNajboljiRezultat(String username) {
+        String upit = "SELECT najbolji_rezultat FROM Korisnik WHERE ime = ?";
         int najboljiRezultat = 0;
         try (Connection conn = connect()) {
             if (conn != null) {
                 try {
                     PreparedStatement prep = conn.prepareStatement(upit);
-                    prep.setString(1,username);
-                    ResultSet rezultat = prep.executeQuery(upit);
+                    prep.setString(1, username);
+                    ResultSet rezultat = prep.executeQuery();
                     najboljiRezultat = rezultat.getInt("najbolji_rezultat");
 
                 } catch (SQLException e) {
-                    System.out.println(e.getMessage());
+                    e.printStackTrace();
                     return -1;
                 }
             }
 
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             return -1;
         }
         return najboljiRezultat;
     }
 
-    public void ažurirajNajboljiRezultat(String username, int rezultat){
-        String upit = "UPDATE table Korisnik SET najbolji_rezultat = ? WHERE ime = ?";
+    public void ažurirajNajboljiRezultat(String username, int rezultat) {
+        String upit = "UPDATE Korisnik SET najbolji_rezultat = ? WHERE ime = ?";
         try (Connection conn = connect()) {
             if (conn != null) {
                 try {
                     PreparedStatement prep = conn.prepareStatement(upit);
                     prep.setInt(1, rezultat);
-                    prep.setString(2,username);
+                    prep.setString(2, username);
                     prep.executeUpdate();
                 } catch (SQLException e) {
+                    e.printStackTrace();
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 }

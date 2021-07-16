@@ -1,3 +1,13 @@
 .label {
     -fx-text-fill: blue;
 }
+
+#naslov{
+    color: blue;
+}
+
+.header-section {
+    -fx-padding: 10px;
+    -fx-font-size: 20px;
+    -fx-background-color: teal;
+}

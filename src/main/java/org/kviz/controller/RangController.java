@@ -39,8 +39,6 @@ public class RangController implements Initializable {
     TableColumn vrijemeRjesavanja;
     @FXML
     TableView<Rezultat> rangTableView;
-    private RangService rangService;
-    private ArrayList<Rezultat> rezultati;
 
     @Autowired
     public RangController(RangService rangService) {

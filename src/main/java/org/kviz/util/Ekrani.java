@@ -1,5 +1,6 @@
 package org.kviz.util;
 
+import com.sun.marlin.stats.Histogram;
 import org.kviz.controller.*;
 
 public enum Ekrani {
@@ -9,7 +10,8 @@ public enum Ekrani {
     RANG(RangController.class),
     REGISTRACIJA(RegistracijaController.class),
     LOGIN(LoginController.class),
-    REZULTATI(RezultatiController.class);
+    REZULTATI(RezultatiController.class),
+    HISTOGRAM(HistogramController.class);
 
     private final Class controllerClass;
 

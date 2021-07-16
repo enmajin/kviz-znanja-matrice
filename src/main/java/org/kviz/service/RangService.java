@@ -28,6 +28,7 @@ public class RangService {
         return rangRepository.dohvatiNajboljeRezultate();
     }
 
+
     public void promijeniEkran(AnchorPane rangAnchorPane, Ekrani ekran) {
         sceneManager.promijeniEkran(getStage(rangAnchorPane), ekran,null);
     }
@@ -35,4 +36,5 @@ public class RangService {
     private Stage getStage(Node pocetna) {
         return (Stage) pocetna.getScene().getWindow();
     }
+
 }

@@ -55,15 +55,14 @@ public class LoginController implements Initializable {
 
     public void loginButtonOnAction(ActionEvent event){
         if(usernameTextField.getText().isBlank()==false && enterPasswordField.getText().isBlank()==false){
-            String lozinka = enterPasswordField.getText();
-            String ime = usernameTextField.getText();
+            String lozinka = enterPasswordField.getText().trim();
+            String ime = usernameTextField.getText().trim();
             Korisnik korisnik = loginService.dohvatiKorisnika(lozinka, ime);
             if(korisnik.getId()==0)
                 loginMessage.setText(" Ne postoji! ");
             else {
                 User.ulogiraj(ime);
                 loginService.promijeniEkran(loginAnchorPane, Ekrani.POCETNAKORISNIK);
-                //korisnikMessage.setText(" Bok! ");
             }
         }
         else{

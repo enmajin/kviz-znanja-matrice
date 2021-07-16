@@ -1,11 +1,10 @@
 package org.kviz.util;
 
-import com.sun.marlin.stats.Histogram;
 import org.kviz.controller.*;
 
 public enum Ekrani {
     POCETNA(PocetnaController.class),
-    POCETNAKORISNIK(PocetnakorisnikController.class),
+    POCETNAKORISNIK(PocetnaKorisnikController.class),
     PITANJE(PitanjeController.class),
     RANG(RangController.class),
     REGISTRACIJA(RegistracijaController.class),

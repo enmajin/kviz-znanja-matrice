@@ -9,16 +9,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import javafx.scene.input.MouseEvent;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.kviz.model.Korisnik;
-import org.kviz.service.LoginService;
 import org.kviz.service.RegistracijaService;
 import org.kviz.util.Ekrani;
 import org.springframework.stereotype.Component;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 @Component
@@ -62,7 +59,7 @@ public class RegistracijaController implements Initializable {
                 if (korisnik.getId() == 0) {
                     int id = registracijaService.max_id();
                     id = id + 1;
-                    registracijaService.dodaj_korisnike(id, lozinka, ime, rez);
+                    registracijaService.dodajKorisnika(id, lozinka, ime, rez);
                     regMessage.setText(" Uspješna registracija! ");
                 } else {
                     registracijaService.promijeniEkran(registracijaAnchorPane, Ekrani.LOGIN);
@@ -84,7 +81,7 @@ public class RegistracijaController implements Initializable {
     }
 
     public void dodaj_korisnike(int id, String loz, String im, int rez) {
-        registracijaService.dodaj_korisnike(id, loz, im, rez);
+        registracijaService.dodajKorisnika(id, loz, im, rez);
     }
 
 

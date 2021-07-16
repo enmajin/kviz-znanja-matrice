@@ -10,11 +10,11 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
 @Service
-public class PocetnakorisnikService {
+public class PocetnaKorisnikService {
     private SceneManager sceneManager;
 
     @Autowired
-    public PocetnakorisnikService(SceneManager sceneManager) {
+    public PocetnaKorisnikService(SceneManager sceneManager) {
         this.sceneManager = sceneManager;
     }
 

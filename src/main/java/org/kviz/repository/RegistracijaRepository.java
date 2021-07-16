@@ -28,8 +28,8 @@ public class RegistracijaRepository {
         return dataBaseUtil.max_id();
     }
 
-    public void dodaj_korisnike(int id, String loz, String im, int rez) {
-        dataBaseUtil.dodaj_korisnike(id ,loz, im, rez);
+    public void dodajKorisnika(int id, String loz, String im, int rez) {
+        dataBaseUtil.dodajKorisnika(id ,loz, im, rez);
     }
 
 }

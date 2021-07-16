@@ -45,14 +45,4 @@ public class PitanjeServiceTest {
             assertThat(zadatak.getMatrica1()).isEqualTo(expectedMatrica);
         }
     }
-
-    //todo treba ovo osposobiti da mozemo testirati bar tu metodu u controllerima
-//    @Test
-//    public void promijeniEkran() {
-//        AnchorPane anchorPane = new AnchorPane();
-//        Scene scene = new Scene(anchorPane);
-//        this.pitanjeService.promijeniEkran((Node) scene.getRoot(), Ekrani.PITANJE, null);
-//        verify(sceneManager, times(1)).promijeniEkran(any(),any(),any());
-//    }
-
 }

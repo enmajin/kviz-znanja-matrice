@@ -23,7 +23,6 @@ public class PocetnaController implements Initializable {
 
     @FXML
     private AnchorPane pocetnaAnchorPane;
-    private Alert alertMetodaNijeImplementirana;
 
     @Autowired
     public PocetnaController(PocetnaService pocetnaService) {
@@ -32,7 +31,6 @@ public class PocetnaController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        alertMetodaNijeImplementirana = new Alert(Alert.AlertType.WARNING, "Metoda nije implementirana.");
         User.korisnickoIme = "";
     }
 
@@ -46,7 +44,5 @@ public class PocetnaController implements Initializable {
 
     public void onLogIn(MouseEvent mouseEvent) {
         pocetnaService.promijeniEkran(pocetnaAnchorPane, Ekrani.LOGIN, null);
-//        alertMetodaNijeImplementirana.show(); // jos nemamo fxml za ovo
-//        pocetnaService.promijeniEkran(pocetna, ViewEnum.LOGIN);
     }
 }

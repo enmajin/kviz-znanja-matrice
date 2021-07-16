@@ -40,16 +40,16 @@ public class DataBaseUtil {
         kreiraj_tablicu(korisnik);
         kreiraj_tablicu(matrica);
 
-        dodaj_korisnike(1, "perinasifra", "Pero", 0);
-        dodaj_korisnike(2, "mirkovasifra", "Mirko", 2);
-        dodaj_korisnike(3, "slavkovasifra", "Slavko", 1);
-        dodaj_korisnike(4, "darkovasifra", "Darko", 3);
-        dodaj_korisnike(5, "ivinasifra", "Ivo", 4);
-        dodaj_korisnike(6, "aninaasifra", "Ana", 2);
-        dodaj_korisnike(7, "majinasifra", "Maja", 2);
-        dodaj_korisnike(8, "ružinasifra", "Ruža", 5);
-        dodaj_korisnike(9, "petrinasifra", "Petra", 4);
-        dodaj_korisnike(10, "teninasifra", "Tena", 4);
+        dodajKorisnika(1, "perinasifra", "Pero", 0);
+        dodajKorisnika(2, "mirkovasifra", "Mirko", 2);
+        dodajKorisnika(3, "slavkovasifra", "Slavko", 1);
+        dodajKorisnika(4, "darkovasifra", "Darko", 3);
+        dodajKorisnika(5, "ivinasifra", "Ivo", 4);
+        dodajKorisnika(6, "aninaasifra", "Ana", 2);
+        dodajKorisnika(7, "majinasifra", "Maja", 2);
+        dodajKorisnika(8, "ružinasifra", "Ruža", 5);
+        dodajKorisnika(9, "petrinasifra", "Petra", 4);
+        dodajKorisnika(10, "teninasifra", "Tena", 4);
 
         for (int i = 0; i < 10; i++) { //napravi 10 matrica dimenzija 2x2
             int dimenzija = 2;
@@ -92,7 +92,7 @@ public class DataBaseUtil {
         }
     }
 
-    public void dodaj_korisnike(int i, String loz, String im, int naj_rez) {
+    public void dodajKorisnika(int i, String loz, String im, int naj_rez) {
         String upit = "INSERT INTO Korisnik (id, lozinka, ime, najbolji_rezultat) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = connect()) {
@@ -270,7 +270,7 @@ public class DataBaseUtil {
         ArrayList<Rezultat> rezultati = new ArrayList<>();
         String upit = "SELECT ROW_NUMBER() OVER (" +
                 "ORDER BY najbolji_rezultat DESC" +
-                ") rang, id, lozinka, ime, najbolji_rezultat FROM Korisnik " +
+                ") rang, id, lozinka, ime, najbolji_rezultat, vrijeme FROM Korisnik " +
                 "ORDER BY najbolji_rezultat DESC LIMIT 10";
         try (Connection conn = connect()) {
             if (conn != null) {

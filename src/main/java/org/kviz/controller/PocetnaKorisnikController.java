@@ -6,7 +6,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import net.rgielen.fxweaver.core.FxmlView;
-import org.kviz.service.PocetnakorisnikService;
+import org.kviz.service.PocetnaKorisnikService;
 import org.kviz.util.Ekrani;
 import org.kviz.util.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +17,9 @@ import java.util.ResourceBundle;
 
 @Component
 @FxmlView("/view/pocetnakorisnik.fxml")
-public class PocetnakorisnikController implements Initializable {
+public class PocetnaKorisnikController implements Initializable {
 
-    private final PocetnakorisnikService pocetnakorisnikService;
+    private final PocetnaKorisnikService pocetnakorisnikService;
 
     @FXML
     private AnchorPane pocetnakorisnikAnchorPane;
@@ -27,7 +27,7 @@ public class PocetnakorisnikController implements Initializable {
     private Text korisnikMessage;
 
     @Autowired
-    public PocetnakorisnikController(PocetnakorisnikService pocetnakorisnikService) {
+    public PocetnaKorisnikController(PocetnaKorisnikService pocetnakorisnikService) {
         this.pocetnakorisnikService = pocetnakorisnikService;
     }
 
@@ -41,6 +41,7 @@ public class PocetnakorisnikController implements Initializable {
     }
 
     public void onLogOut(MouseEvent mouseEvent) {
+        User.odjavi();
         pocetnakorisnikService.promijeniEkran(pocetnakorisnikAnchorPane, Ekrani.POCETNA, null);
     }
 

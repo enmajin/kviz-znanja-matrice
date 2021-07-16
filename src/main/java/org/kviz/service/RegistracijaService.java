@@ -4,14 +4,11 @@ import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.kviz.model.Korisnik;
-import org.kviz.repository.LoginRepository;
 import org.kviz.repository.RegistracijaRepository;
 import org.kviz.util.Ekrani;
 import org.kviz.view.SceneManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 
 @Service
 public class RegistracijaService {
@@ -40,8 +37,8 @@ public class RegistracijaService {
         return registracijaRepository.max_id();
     }
 
-    public void dodaj_korisnike(int id, String loz, String im, int rez) {
-        registracijaRepository.dodaj_korisnike(id, loz, im, rez);
+    public void dodajKorisnika(int id, String loz, String im, int rez) {
+        registracijaRepository.dodajKorisnika(id, loz, im, rez);
     }
 
 }

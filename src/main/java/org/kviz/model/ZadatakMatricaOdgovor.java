@@ -1,5 +1,7 @@
 package org.kviz.model;
 
+import java.util.Arrays;
+
 public class ZadatakMatricaOdgovor extends Zadatak {
     Matrica ispravnoRjesenje;
 
@@ -32,7 +34,7 @@ public class ZadatakMatricaOdgovor extends Zadatak {
     }
 
     public boolean getIsZadatakIspravnoRijesen() {
-        return korisnikovoRjesenje.vrijednosti == ispravnoRjesenje.vrijednosti && //todo: mozda bude problema s ovim ako negdje ostane razmak viska, treba usporedivati na bolji nacin
-                korisnikovoRjesenje.dimenzija == ispravnoRjesenje.dimenzija;
+        return korisnikovoRjesenje.dimenzija == korisnikovoRjesenje.dimenzija &&
+                Arrays.equals(korisnikovoRjesenje.vrijednosti, ispravnoRjesenje.vrijednosti);
     }
 }

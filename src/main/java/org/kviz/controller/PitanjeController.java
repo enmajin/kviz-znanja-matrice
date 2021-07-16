@@ -165,6 +165,8 @@ public class PitanjeController implements Initializable {
     public void onPotvrdi(MouseEvent mouseEvent) {
         if (vrstaZadatka == VrstaZadatka.ODGOVOR_MATRICA) {
             Matrica unesenaMatrica = procitajUnesenuMatricu();
+            if (unesenaMatrica==null) return;
+
             ((ZadatakMatricaOdgovor) trenutniZadatak).setKorisnikovoRjesenje(unesenaMatrica);
             zadaci.set(brojOdgovorenihPitanja, trenutniZadatak);
         }
@@ -206,19 +208,23 @@ public class PitanjeController implements Initializable {
         unesenaMatrica.setDimenzija(dimenzija);
         double[] arr = new double[dimenzija*dimenzija];
         int i = 0;
-        for (Node red : unosMatriceVBox.getChildren()) {
-            for (Node textField : ((HBox) red).getChildren()) {
-                String element = ((TextField) textField).getText();
-                if (element.equals("")) {
-                    arr[i++] = 0;
-                }
-                else {
-                    arr[i++] = Double.parseDouble(element);
+        try {
+            for (Node red : unosMatriceVBox.getChildren()) {
+                for (Node textField : ((HBox) red).getChildren()) {
+                    String element = ((TextField) textField).getText();
+                    if (element.equals("")) {
+                        arr[i++] = 0;
+                    } else {
+                        arr[i++] = Double.parseDouble(element);
+                    }
                 }
             }
+            unesenaMatrica.setVrijednosti(arr);
+            return unesenaMatrica;
+        } catch (NumberFormatException e) {
+            new Alert(Alert.AlertType.WARNING, "Unosi moraju biti cijeli brojevi ili realni brojevi s tockom.").show();
+            return null;
         }
-        unesenaMatrica.setVrijednosti(arr);
-        return unesenaMatrica;
     }
 
     private SlovoUzOdgovor procitajUneseniDouble(){

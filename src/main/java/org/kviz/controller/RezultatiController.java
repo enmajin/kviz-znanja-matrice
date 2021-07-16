@@ -60,7 +60,7 @@ public class RezultatiController implements Initializable {
 
     public void setData(InfoZaRezultateDto data) {
         this.zadaci = data.getZadaci();
-        this.vrijeme = data.getVrijeme(); //todo mozemo prikazati i vrijeme
+        this.vrijeme = data.getVrijeme();
         prikaziRezultate();
     }
 
@@ -82,7 +82,6 @@ public class RezultatiController implements Initializable {
                 rezultatiService.ažurirajVrijeme(User.korisnickoIme, vrijeme);
             }
         }
-        //todo: spremiti broj bodova u bazu ako je veci od osobnog rekorda (mozda i vrijeme?)
 
         bodovi.setText(brojBodova + "/" + BROJ_ZADATAKA_U_KVIZU);
     }

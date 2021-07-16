@@ -17,7 +17,7 @@ import java.util.*;
 
 @Service
 public class PitanjeService {
-    private static final int MAX_DIMENZIJA = 3; //todo: dodati vise mogucih dimenzija u bazu
+    private static final int MAX_DIMENZIJA = 3;
     private static final ArrayList<Operacije> LISTA_PITANJA = new ArrayList<>(List.of(Operacije.values()));
     private static final int BROJ_ZADATAKA_U_KVIZU = 5;
 

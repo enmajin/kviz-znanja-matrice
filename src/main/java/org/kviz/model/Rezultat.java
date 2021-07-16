@@ -6,12 +6,12 @@ public class Rezultat {
     int rang;
     String ime;
     int bodovi;
-    Duration vrijeme;
+    String vrijeme;
 
     public Rezultat() {
     }
 
-    public Rezultat(String ime, int bodovi, Duration vrijeme, int rang) {
+    public Rezultat(String ime, int bodovi, String vrijeme, int rang) {
         this.ime = ime;
         this.bodovi = bodovi;
         this.vrijeme = vrijeme;
@@ -42,11 +42,11 @@ public class Rezultat {
         this.bodovi = bodovi;
     }
 
-    public Duration getVrijeme() {
+    public String getVrijeme() {
         return vrijeme;
     }
 
-    public void setVrijeme(Duration vrijeme) {
+    public void setVrijeme(String vrijeme) {
         this.vrijeme = vrijeme;
     }
 }

@@ -27,7 +27,7 @@ public class DataBaseUtil {
                 + " id Integer NOT NULL PRIMARY KEY ,\n"
                 + " lozinka varchar(60) NOT NULL ,\n"
                 + " ime varchar(60) NOT NULL ,\n"
-                + " najbolji_rezultat integer \n"
+                + " najbolji_rezultat integer, \n"
                 + " vrijeme varchar(60) \n"
                 + ");";
 
@@ -207,7 +207,6 @@ public class DataBaseUtil {
                             rezultat.getInt("dimenzija")
                     );
                 } catch (SQLException e) {
-                    //todo dodati logiranje exceptiona
                 }
             }
         } catch (SQLException e) {
@@ -236,7 +235,6 @@ public class DataBaseUtil {
                             rezultat.getInt("najbolji_rezultat")
                     );
                 } catch (SQLException e) {
-                    //todo dodati logiranje exceptiona
                 }
             }
         } catch (SQLException e) {
@@ -281,7 +279,8 @@ public class DataBaseUtil {
                         String ime = rezultat.getString("ime");
                         int najboljiRezultat = rezultat.getInt("najbolji_rezultat");
                         int rang = rezultat.getInt("rang");
-                        rezultati.add(new Rezultat(ime, najboljiRezultat, Duration.ofMillis(0), rang));
+                        String vr = rezultat.getString("vrijeme");
+                        rezultati.add(new Rezultat(ime, najboljiRezultat, vr, rang));
                     }
                 } catch (SQLException e) {
                     System.out.println(e.getMessage());
@@ -362,12 +361,20 @@ public class DataBaseUtil {
     }
 
     public void ažurirajVrijeme(String username, Duration vrijeme){
-        String upit = "UPDATE table Korisnik SET vrijeme = ? WHERE ime = ?";
+        String upit = "UPDATE Korisnik SET vrijeme = ? WHERE ime = ?";
+
+        long seconds = vrijeme.getSeconds();
+        long absSeconds = Math.abs(seconds);
+        String v = String.format(
+                "%02d:%02d",
+                (absSeconds % 3600) / 60,
+                absSeconds % 60);
+
         try (Connection conn = connect()) {
             if (conn != null) {
                 try {
                     PreparedStatement prep = conn.prepareStatement(upit);
-                    prep.setString(1, String.valueOf(vrijeme));
+                    prep.setString(1, v);
                     prep.setString(2,username);
                     prep.executeUpdate();
                 } catch (SQLException e) {
